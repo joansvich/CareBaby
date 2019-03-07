@@ -1,26 +1,47 @@
-<header>
-  <nav class="">
-    <ul>
-      {{#if isLogin}}
-      <li><a href="/">Log Out</a></li>
-      {{else}}
-      <li><a href="/auth/login">Log In</a></li>
-      {{/if}}
-    </ul>
+<header class="top-bar">
+  <nav>
+    <div class="menuToggle">
+      <input type="checkbox" />
+      <!--
+      Some spans to act as a hamburger.
+      -->
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul class="menu">
+        {{#if isLogin}}
+        <li><a href="/">Log Out</a></li>
+        {{else}}
+        <li><a href="/auth/login">Log In</a></li>
+        {{/if}}
+      </ul>
+    </div>
   </nav>
   <div class="logo">
     <img src="/images/logo.png" alt="logo">
   </div>
   <div class="avatar">
-    <img src="/images/avatar.png" alt="avatar">
+    <a href=""><img src="/images/user.svg" alt="avatar"></a>
   </div>
 </header>
 <main>
-  <ul class="cards">
-    {{#each babySitterArray}}
-      <li class="cards__item"> 
-        <a href="/babysitter/{{this._id}}">{{this.username}}</a>
-      </li>
-    {{/each}}
-  </ul>
+  <section>
+    <ul class="cards">
+      {{#each babySitterArray}}
+        <li class="cards-item"> 
+          <div class="cards-img">
+            <img src="/images/user.svg" alt="">
+          </div>
+          <div class="cards-data">
+            <p class="cards-data-name"><a href="/babysitter/{{this._id}}">{{this.username}}</a></p>
+            <div class="cards-data-location">
+              <img src="/images/pointer.svg" alt="">
+              <p>Barcelona</p>
+            </div>
+          </div>
+          <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
+        </li>
+      {{/each}}
+    </ul>
+  </section>
 </main>
