@@ -1,0 +1,26 @@
+<header>
+  <nav class="">
+    <ul>
+      {{#if isLogin}}
+      <li><a href="/">Log Out</a></li>
+      {{else}}
+      <li><a href="/auth/login">Log In</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+  <div class="logo">
+    <img src="/images/logo.png" alt="logo">
+  </div>
+  <div class="avatar">
+    <img src="/images/avatar.png" alt="avatar">
+  </div>
+</header>
+<main>
+  <ul class="cards">
+    {{#each babySitterArray}}
+      <li class="cards__item"> 
+        <a href="/babysitter/{{this._id}}">{{this.username}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</main>
