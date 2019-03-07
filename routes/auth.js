@@ -2,6 +2,7 @@
 
 var express = require('express');
 const User = require('../models/User');
+const Babysitter = require('../models/Babysitter');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
@@ -13,11 +14,11 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', async (req, res, next) => {
-  const { username, password, email } = req.body;
-
+  const { username, password, email, userType } = req.body;
+  console.log(userType);
   try {
     // commprobar tots els camps plens
-    if (!username || !password || !email) {
+    if (!username || !password || !email || !userType) {
       res.redirect('/auth/signup');
       return;
     }
@@ -40,7 +41,14 @@ router.post('/signup', async (req, res, next) => {
       password: hashedPassword,
       email
     };
-    const createdUser = await User.create(newUser);
+    // comprobar quin tipo dusuari tenim
+
+    // tipo user
+    if (userType === 'user') {
+      const createdUser = await User.create(newUser);
+    } else if (userType === 'babysitter') {
+      const createdUser = await Babysitter.create(newUser);
+    }
 
     // redirect home
     res.redirect('/');
