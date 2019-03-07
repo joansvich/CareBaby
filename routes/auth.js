@@ -50,4 +50,43 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
+// ----------------------------------------------------
+
+// Log in
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
+});
+
+router.post('/login', async (req, res, next) => {
+  const { username, password } = req.body;
+
+  try {
+    // commprobar tots els camps plens
+    if (!username || !password) {
+      res.redirect('/auth/login');
+      return;
+    }
+
+    // comprobar credencials
+    const user = await User.findOne({ username });
+    if (!user) {
+      console.log('This username is not on db');
+      res.redirect('/auth/login');
+      return;
+    }
+    if (bcrypt.compareSync(password, user.password)) {
+      // req.session.currentUser = user;
+      console.log('Login!');
+      res.redirect('/');
+      return;
+    } else {
+      console.log('Error password!');
+      res.redirect('/auth/login');
+      return;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
