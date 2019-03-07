@@ -44,7 +44,7 @@ List of other features outside of the MVPs scope
     - user not exists
   - create user with encrypted password
   - store user in session
-  - redirect to /events
+  - redirect to /
 - GET /auth/login
   - redirects to / if user logged in
   - renders the login form (with flash msg)
@@ -58,18 +58,18 @@ List of other features outside of the MVPs scope
     - user exists
     - passdword matches
   - store user in session
-  - redirect to /events
+  - redirect to /
 - POST /auth/logout
   - body: (empty)
-  - redirect to /events
+  - redirect to /
 
 - GET /profile/:id
   - validation
     - id is valid (next to 404)
     - id exists (next to 404)
   - renders the profile page
-  - edit button to edit description
-- POST /events/:id/edit
+  - edit button to edit profile
+- POST /profile/:id/edit
   - redirects to / if user is anonymous
   - validation
     - id is valid (next to 404)
@@ -86,6 +86,7 @@ username: String
 password: String
 email: String
 location: String
+description: String
 ```
 
 Babysitter model
@@ -95,14 +96,11 @@ username: String
 password: String
 Email: String
 location: String
+description: String
 attendees: [ObjectId<User>]
 ```
 
 ## Links
-
-### Trello
-
-[Link to your trello board](https://trello.com) or picture of your physical board
 
 ### Git
 
@@ -117,3 +115,4 @@ The url to your repository and to your deployed project
 The url to your presentation slides
 
 [Slides Link](http://slides.com)
+
