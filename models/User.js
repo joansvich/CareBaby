@@ -26,6 +26,9 @@ const userSchema = new Schema({
   userType: {
     type: String,
     enum: ['parent', 'babysitter']
+  },
+  imageUrl: {
+    type: String
   }
 });
 

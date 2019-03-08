@@ -1,0 +1,31 @@
+'use strict';
+
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'demo',
+  allowedFormats: ['jpg', 'png']
+});
+
+const parser = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg') {
+      req.fileValidationError = true;
+      return cb(null, false, new Error('Wrong file type uploaded'));
+    }
+    cb(null, true);
+  }
+});
+
+module.exports = parser
+;

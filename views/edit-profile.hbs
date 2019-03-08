@@ -1,5 +1,5 @@
 {{> navbar}}
-<form action="/profile/{{this._id}}/update" method="post">
+<form action="/profile/{{this._id}}/update" method="post" enctype="multipart/form-data">
   <section>
     <article class="profile">
       <div class="profile-details">
@@ -16,6 +16,10 @@
       </div>
       <div class="profile-description">
         <textarea rows="4" cols="55" name="description">{{this.description}}</textarea>
+      </div>
+      <div>
+        <label>Upload a picture</label>
+        <input type="file" name="image">
       </div>
       <div class="profile-actions">
         <button class="button" type="submit">Aceptar</button>

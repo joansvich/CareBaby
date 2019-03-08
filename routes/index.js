@@ -2,6 +2,7 @@ var express = require('express');
 const Contract = require('../models/Contract');
 const User = require('../models/User');
 const { userIsNotLogged } = require('../middlewares/auth');
+const parser = require('../helpers/file-upload');
 
 var router = express.Router();
 
@@ -48,13 +49,14 @@ router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
   }
 });
 
-router.post('/profile/:id/update', userIsNotLogged, async (req, res, next) => {
+router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), async (req, res, next) => {
   const { username, description } = req.body;
   const { id } = req.params;
   try {
     const editUser = {
       username,
-      description
+      description,
+      imageUrl: req.file.url
     };
     await User.findByIdAndUpdate(id, editUser);
     res.redirect(`/profile/${id}`);
