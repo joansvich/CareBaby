@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -27,7 +28,7 @@ app.use(session({
 }));
 
 // Connect to db
-mongoose.connect('mongodb://localhost/carebaby', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
