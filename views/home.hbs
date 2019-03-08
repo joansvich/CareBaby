@@ -1,32 +1,4 @@
-<header class="top-bar">
-  <nav>
-    <div class="menuToggle">
-      <input type="checkbox" />
-      <!--
-      Some spans to act as a hamburger.
-      -->
-      <span></span>
-      <span></span>
-      <span></span>
-      <ul class="menu">
-        
-        {{#if currentUser}}
-        <form action="/auth/logout" method="post">
-          <li><button type="submit">Log Out</button></li>
-        </form>
-        {{else}}
-        <li><a href="/auth/login">Log In</a></li>
-        {{/if}}
-      </ul>
-    </div>
-  </nav>
-  <div class="logo">
-    <img src="/images/logo.png" alt="logo">
-  </div>
-  <div class="avatar">
-    <a href=""><img src="/images/user.svg" alt="avatar"></a>
-  </div>
-</header>
+{{> navbar}}
 <main>
   <section>
     <ul class="cards">

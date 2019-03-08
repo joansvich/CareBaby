@@ -5,6 +5,7 @@
   --white: #fff;
   --dark: #555;
   --gray: #f5f5f5;
+  --color-delete: #F44336;
 
   --font-size-xs: 10px;
   --font-size-small: 14px;
@@ -97,10 +98,23 @@ padding: 1rem;
 }
 
 .button {
-  width: 100%;
-  background-color: blue;
-  color: #fff;
-  border: 1px solid #fff
+  display: inline-block;
+  color: var(--white);
+  background: var(--color-primary);
+  padding: 0.75rem 3rem;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: var(--font-size-normal);
+  font: 400 var(--font-size-normal);
+  line-height: 1.5rem;
+}
+
+.button--delete{
+  background: var(--color-delete);
 }
 
 .menuToggle
@@ -284,4 +298,44 @@ padding: 1rem;
 .cards-data-location img{
   width: 15px;
   height: auto;
+}
+
+/* Profile view */
+
+.profile-details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.profile-details-avatar{
+  flex-basis: 40%;
+  align-items: center;
+}
+
+.profile-details-avatar img {
+  display: block;
+  width: 100%;
+}
+
+.profile-details-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-basis: 60%;
+  padding-left: var(--font-size-large);
+}
+
+.profile-description {
+  padding: var(--font-size-large) 0;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-actions a{
+  display: block;
 }

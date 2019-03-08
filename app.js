@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
+const hbs = require('hbs');
+
 const app = express();
 
 // Session
@@ -34,6 +36,8 @@ mongoose.connect('mongodb://localhost/carebaby', {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+hbs.registerPartials(path.join(__dirname, '/views/partials'));
 
 app.use(logger('dev'));
 app.use(express.json());

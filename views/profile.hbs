@@ -1,0 +1,27 @@
+{{> navbar}}
+
+<section>
+  <article class="profile">
+    <div class="profile-details">
+      <div class="profile-details-avatar">
+        <img src="images/user.svg" alt="">
+      </div>
+      <div class="profile-details-info">
+        <p class="cards-data-name"><a href="/babysitter/{{this._id}}">{{currentUser.username}}</a></p>
+        <div class="cards-data-location">
+          <img src="/images/pointer.svg" alt="">
+          <p>Barcelona</p>
+        </div>
+      </div>
+    </div>
+    <div class="profile-description">
+      <p>{{currentUser.description}}</p>
+    </div>
+    <div>
+      <form class="profile-actions"action="/profile/{{user._id}}/delete" method="post">
+        <a class="button" href="/profile/{{user._id}}/edit">Editar</a>
+        <button class="button button--delete" type="submit">Borrar cuenta</button>
+      </form>
+    </div>
+  </article>
+</section>

@@ -2,7 +2,6 @@
 
 var express = require('express');
 const User = require('../models/User');
-const Babysitter = require('../models/Babysitter');
 const { userIsLogged, userIsNotLogged } = require('../middlewares/auth');
 const bcrypt = require('bcrypt');
 
@@ -40,19 +39,12 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
     const newUser = {
       username,
       password: hashedPassword,
-      email
+      email,
+      userType
     };
-    // comprobar quin tipo dusuari tenim
 
-    // tipo user
-
-    if (userType === 'user') {
-      const createdUser = await User.create(newUser);
-      req.session.currentUser = createdUser;
-    } else if (userType === 'babysitter') {
-      const createdUser = await Babysitter.create(newUser);
-      req.session.currentUser = createdUser;
-    }
+    const createdUser = await User.create(newUser);
+    req.session.currentUser = createdUser;
 
     // redirect home
     res.redirect('/');

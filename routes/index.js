@@ -1,11 +1,21 @@
 var express = require('express');
-const Babysitter = require('../models/Babysitter');
+const Contract = require('../models/Contract');
+const User = require('../models/User');
 var router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const babySitterArray = await Babysitter.find();
+    console.log(req.session.currentUser);
+    const babySitterArray = await User.find({ userType: 'babysitter' });
     res.render('home', { babySitterArray });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile', async (req, res, next) => {
+  try {
+    res.render('profile');
   } catch (error) {
     next(error);
   }
