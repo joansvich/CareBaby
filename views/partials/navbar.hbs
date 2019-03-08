@@ -23,6 +23,10 @@
     <img src="/images/logo.png" alt="logo">
   </div>
   <div class="avatar">
+    {{#if currentUser}}
+    <a href="/profile/{{currentUser._id}}"><img src="{{currentUser.imageUrl}}" alt="avatar"></a>
+    {{else}}
     <a href="/profile/{{currentUser._id}}"><img src="/images/user.svg" alt="avatar"></a>
+    {{/if}}
   </div>
 </header>

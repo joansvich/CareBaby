@@ -58,6 +58,7 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
       description,
       imageUrl: req.file.url
     };
+
     await User.findByIdAndUpdate(id, editUser);
     res.redirect(`/profile/${id}`);
   } catch (error) {

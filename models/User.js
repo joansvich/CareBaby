@@ -28,7 +28,8 @@ const userSchema = new Schema({
     enum: ['parent', 'babysitter']
   },
   imageUrl: {
-    type: String
+    type: String,
+    default: '/images/user.svg'
   }
 });
 
