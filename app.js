@@ -5,8 +5,24 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
+
+// Session
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: 'some-string',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 
 // Connect to db
 mongoose.connect('mongodb://localhost/carebaby', {
@@ -24,6 +40,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  app.locals.currentUser = req.session.currentUser;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

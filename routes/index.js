@@ -4,9 +4,8 @@ var router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const isLogin = true;
     const babySitterArray = await Babysitter.find();
-    res.render('home', { isLogin, babySitterArray });
+    res.render('home', { babySitterArray });
   } catch (error) {
     next(error);
   }

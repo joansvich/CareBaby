@@ -3,17 +3,18 @@
 var express = require('express');
 const User = require('../models/User');
 const Babysitter = require('../models/Babysitter');
+const { userIsLogged, userIsNotLogged } = require('../middlewares/auth');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 var router = express.Router();
 
 // Signup
-router.get('/signup', (req, res, next) => {
+router.get('/signup', userIsLogged, (req, res, next) => {
   res.render('auth/signup');
 });
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', userIsLogged, async (req, res, next) => {
   const { username, password, email, userType } = req.body;
   console.log(userType);
   try {
@@ -44,15 +45,17 @@ router.post('/signup', async (req, res, next) => {
     // comprobar quin tipo dusuari tenim
 
     // tipo user
+
     if (userType === 'user') {
       const createdUser = await User.create(newUser);
+      req.session.currentUser = createdUser;
     } else if (userType === 'babysitter') {
       const createdUser = await Babysitter.create(newUser);
+      req.session.currentUser = createdUser;
     }
 
     // redirect home
     res.redirect('/');
-    // res.render('auth/signup');
   } catch (error) {
     console.log(error);
   }
@@ -61,11 +64,11 @@ router.post('/signup', async (req, res, next) => {
 // ----------------------------------------------------
 
 // Log in
-router.get('/login', (req, res, next) => {
+router.get('/login', userIsLogged, (req, res, next) => {
   res.render('auth/login');
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', userIsLogged, async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
@@ -83,7 +86,7 @@ router.post('/login', async (req, res, next) => {
       return;
     }
     if (bcrypt.compareSync(password, user.password)) {
-      // req.session.currentUser = user;
+      req.session.currentUser = user;
       console.log('Login!');
       res.redirect('/');
       return;
@@ -95,6 +98,12 @@ router.post('/login', async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+router.post('/logout', userIsNotLogged, (req, res, next) => {
+  delete req.session.currentUser;
+  console.log('logout');
+  res.redirect('/');
 });
 
 module.exports = router;

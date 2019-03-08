@@ -9,8 +9,11 @@
       <span></span>
       <span></span>
       <ul class="menu">
-        {{#if isLogin}}
-        <li><a href="/">Log Out</a></li>
+        
+        {{#if currentUser}}
+        <form action="/auth/logout" method="post">
+          <li><button type="submit">Log Out</button></li>
+        </form>
         {{else}}
         <li><a href="/auth/login">Log In</a></li>
         {{/if}}
