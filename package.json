@@ -7,11 +7,12 @@
     "start-dev": "nodemon -e js,json,hbs bin/www"
   },
   "engines": {
-    "node":"11.9.0",
+    "node": "11.9.0",
     "npm": "6.9.0"
   },
   "dependencies": {
     "bcrypt": "^3.0.4",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",

@@ -10,7 +10,10 @@ var router = express.Router();
 
 // Signup
 router.get('/signup', userIsLogged, (req, res, next) => {
-  res.render('auth/signup');
+  const data = {
+    messages: req.flash('validation')
+  };
+  res.render('auth/signup', data);
 });
 
 router.post('/signup', userIsLogged, async (req, res, next) => {
@@ -19,6 +22,7 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
   try {
     // commprobar tots els camps plens
     if (!username || !password || !userType) {
+      req.flash('validation', 'Rellene todos los campos');
       res.redirect('/auth/signup');
       return;
     }
@@ -56,7 +60,10 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
 
 // Log in
 router.get('/login', userIsLogged, (req, res, next) => {
-  res.render('auth/login');
+  const data = {
+    messages: req.flash('validation')
+  };
+  res.render('auth/login', data);
 });
 
 router.post('/login', userIsLogged, async (req, res, next) => {
@@ -65,6 +72,7 @@ router.post('/login', userIsLogged, async (req, res, next) => {
   try {
     // commprobar tots els camps plens
     if (!username || !password) {
+      req.flash('validation', 'Rellene todos los campos');
       res.redirect('/auth/login');
       return;
     }

@@ -18,9 +18,9 @@
       <p>{{user.description}}</p>
     </div>
     <div>
-      {{#if myUser}}
-      <form class="profile-actions"action="/profile/{{currentUser._id}}/delete" method="post">
-        <a class="button" href="/profile/{{currentUser._id}}/edit">Editar</a>
+      {{#if isMyUser}}
+      <form class="profile-actions"action="/profile/{{user._id}}/delete" method="post">
+        <a class="button" href="/profile/{{user._id}}/edit">Editar</a>
         <button class="button button--delete" type="submit">Borrar cuenta</button>
       </form>
       {{/if}}

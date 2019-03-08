@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session);
 
 const hbs = require('hbs');
@@ -26,6 +27,9 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
+
+// Flash
+app.use(flash());
 
 // Connect to db
 mongoose.connect(process.env.MONGODB_URI, {

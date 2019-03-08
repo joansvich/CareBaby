@@ -26,13 +26,13 @@ router.get('/profile', userIsNotLogged, async (req, res, next) => {
 router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   const { id } = req.params;
   const currentUser = req.session.currentUser;
-  let myUser = false;
+  let isMyUser = false;
   try {
     if (id === currentUser._id) {
-      myUser = true;
+      isMyUser = true;
     }
     const user = await User.findById(id);
-    res.render('profile', { user, myUser });
+    res.render('profile', { user, isMyUser });
   } catch (error) {
     next(error);
   }
@@ -48,16 +48,16 @@ router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
   }
 });
 
-router.post('/profile/update', userIsNotLogged, async (req, res, next) => {
+router.post('/profile/:id/update', userIsNotLogged, async (req, res, next) => {
   const { username, description } = req.body;
-  const currentUser = req.session.currentUser;
+  const { id } = req.params;
   try {
     const editUser = {
       username,
       description
     };
-    await User.findOneAndUpdate(currentUser._id, editUser);
-    res.redirect(`/profile/${currentUser._id}`);
+    await User.findByIdAndUpdate(id, editUser);
+    res.redirect(`/profile/${id}`);
   } catch (error) {
     next(error);
   }
