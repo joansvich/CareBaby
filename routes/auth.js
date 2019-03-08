@@ -14,11 +14,11 @@ router.get('/signup', userIsLogged, (req, res, next) => {
 });
 
 router.post('/signup', userIsLogged, async (req, res, next) => {
-  const { username, password, email, userType } = req.body;
+  const { username, password, userType } = req.body;
   console.log(userType);
   try {
     // commprobar tots els camps plens
-    if (!username || !password || !email || !userType) {
+    if (!username || !password || !userType) {
       res.redirect('/auth/signup');
       return;
     }
@@ -39,7 +39,6 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
     const newUser = {
       username,
       password: hashedPassword,
-      email,
       userType
     };
 

@@ -38,7 +38,6 @@ List of other features outside of the MVPs scope
   - body:
     - username
     - password
-    - email
   - validation
     - fields not empty
     - user not exists
@@ -84,7 +83,6 @@ User model
 ```
 username: String
 password: String
-email: String
 location: String
 description: String
 ```
@@ -94,7 +92,6 @@ Babysitter model
 ```
 username: String
 password: String
-Email: String
 location: String
 description: String
 attendees: [ObjectId<User>]

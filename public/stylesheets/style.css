@@ -5,6 +5,7 @@
   --white: #fff;
   --dark: #555;
   --gray: #f5f5f5;
+  --light-gray: #dddddd;
   --color-delete: #F44336;
 
   --font-size-xs: 10px;
@@ -22,9 +23,6 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
-
-/* ---- typography ---- */
 
 body {
   color: var(--dark);
@@ -64,6 +62,13 @@ a:hover
  {
    color: var(--color-primary-hover);
  }
+
+textarea, input{
+  font-size: 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 3px;
+  padding: 0.75rem;
+}
 
 .container {
   margin: 0 20px;
@@ -289,6 +294,10 @@ padding: 1rem;
   font-weight: 600;
 }
 
+input.cards-data-name{
+  width: 100%;
+}
+
 .cards-data-location {
   display: flex;
   flex-direction: row;
@@ -338,4 +347,10 @@ padding: 1rem;
 
 .profile-actions a{
   display: block;
+}
+
+.profile-description textarea{
+  height: 150px;
+  width: calc(100vw - 2rem);
+
 }

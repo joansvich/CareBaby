@@ -7,7 +7,7 @@
         <img src="/images/user.svg" alt="">
       </div>
       <div class="profile-details-info">
-        <p class="cards-data-name"><a href="/babysitter/{{this._id}}">{{this.username}}</a></p>
+        <p class="cards-data-name"><a href="/babysitter/{{user._id}}">{{user.username}}</a></p>
         <div class="cards-data-location">
           <img src="/images/pointer.svg" alt="">
           <p>Barcelona</p>
@@ -15,13 +15,15 @@
       </div>
     </div>
     <div class="profile-description">
-      <p>{{this.description}}</p>
+      <p>{{user.description}}</p>
     </div>
     <div>
+      {{#if myUser}}
       <form class="profile-actions"action="/profile/{{currentUser._id}}/delete" method="post">
         <a class="button" href="/profile/{{currentUser._id}}/edit">Editar</a>
         <button class="button button--delete" type="submit">Borrar cuenta</button>
       </form>
+      {{/if}}
     </div>
   </article>
 </section>
