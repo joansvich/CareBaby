@@ -8,9 +8,10 @@ var router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(req.session.currentUser);
+    const currentUser = req.session.currentUser;
     const babySitterArray = await User.find({ userType: 'babysitter' });
-    res.render('home', { babySitterArray });
+    const currentUserJs = await User.findById(currentUser._id);
+    res.render('home', { babySitterArray, currentUserJs });
   } catch (error) {
     next(error);
   }
@@ -32,8 +33,8 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
     if (id === currentUser._id) {
       isMyUser = true;
     }
-    const user = await User.findById(id);
-    res.render('profile', { user, isMyUser });
+    const currentUserJs = await User.findById(id);
+    res.render('profile', { currentUserJs, isMyUser });
   } catch (error) {
     next(error);
   }
@@ -42,8 +43,8 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
 router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
-    res.render('edit-profile', user);
+    const currentUserJs = await User.findById(id);
+    res.render('edit-profile', { currentUserJs });
   } catch (error) {
     next(error);
   }
