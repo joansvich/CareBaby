@@ -4,10 +4,10 @@
   <article class="profile">
     <div class="profile-details">
       <div class="profile-details-avatar">
-        <img src="{{currentUserJs.imageUrl}}" alt="">
+        <img src="{{userSelected.imageUrl}}" alt="">
       </div>
       <div class="profile-details-info">
-        <p class="cards-data-name"><a href="/babysitter/{{currentUserJs._id}}">{{currentUserJs.username}}</a></p>
+        <p class="cards-data-name"><a href="/babysitter/{{userSelected._id}}">{{userSelected.username}}</a></p>
         <div class="cards-data-location">
           <img src="/images/pointer.svg" alt="">
           <p>Barcelona</p>
@@ -15,12 +15,12 @@
       </div>
     </div>
     <div class="profile-description">
-      <p>{{currentUserJs.description}}</p>
+      <p>{{userSelected.description}}</p>
     </div>
     <div>
       {{#if isMyUser}}
-      <form class="profile-actions"action="/profile/{{currentUserJs._id}}/delete" method="post">
-        <a class="button" href="/profile/{{currentUserJs._id}}/edit">Editar</a>
+      <form class="profile-actions"action="/profile/{{userSelected._id}}/delete" method="post">
+        <a class="button" href="/profile/{{userSelected._id}}/edit">Editar</a>
         <button class="button button--delete" type="submit">Borrar cuenta</button>
       </form>
       {{/if}}

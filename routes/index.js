@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     if (currentUser) {
       const currentUserJs = await User.findById(currentUser._id);
       res.render('home', { babySitterArray, currentUserJs });
-    }else {
+    } else {
       res.render('home', { babySitterArray });
     }
   } catch (error) {
@@ -31,14 +31,15 @@ router.get('/profile', userIsNotLogged, async (req, res, next) => {
 
 router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   const { id } = req.params;
-  const currentUser = req.session.currentUser;
+  const userCookie = req.session.currentUser;
   let isMyUser = false;
   try {
-    if (id === currentUser._id) {
+    if (id === userCookie._id) {
       isMyUser = true;
     }
-    const currentUserJs = await User.findById(id);
-    res.render('profile', { currentUserJs, isMyUser });
+    const userSelected = await User.findById(id);
+    const currentUserJs = await User.findById(userCookie._id);
+    res.render('profile', { userSelected, isMyUser, currentUserJs });
   } catch (error) {
     next(error);
   }
