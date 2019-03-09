@@ -59,11 +59,19 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
   const { username, description } = req.body;
   const { id } = req.params;
   try {
-    const editUser = {
-      username,
-      description,
-      imageUrl: req.file.url
-    };
+    let editUser = {};
+    if (req.file) {
+      editUser = {
+        username,
+        description,
+        imageUrl: req.file.url
+      };
+    } else {
+      editUser = {
+        username,
+        description
+      };
+    }
 
     await User.findByIdAndUpdate(id, editUser);
     res.redirect(`/profile/${id}`);
