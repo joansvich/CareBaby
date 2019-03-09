@@ -361,3 +361,8 @@ input.cards-data-name{
   width: calc(100vw - 2rem);
 
 }
+
+#map {
+  height: 300px;
+  width: 100%;
+}
