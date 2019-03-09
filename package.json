@@ -22,6 +22,7 @@
     "express-session": "^1.15.6",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
+    "mapbox-gl": "^0.53.1",
     "mongoose": "^5.4.17",
     "morgan": "~1.9.0",
     "multer": "^1.4.1",

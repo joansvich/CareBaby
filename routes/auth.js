@@ -17,7 +17,7 @@ router.get('/signup', userIsLogged, (req, res, next) => {
 });
 
 router.post('/signup', userIsLogged, async (req, res, next) => {
-  const { username, password, userType } = req.body;
+  const { username, password, userType, latitude, longitude } = req.body;
   console.log(userType);
   try {
     // commprobar tots els camps plens
@@ -43,7 +43,11 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
     const newUser = {
       username,
       password: hashedPassword,
-      userType
+      userType,
+      location: {
+        type: 'Point',
+        coordinates: [longitude, latitude]
+      }
     };
 
     const createdUser = await User.create(newUser);
