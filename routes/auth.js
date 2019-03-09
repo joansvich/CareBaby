@@ -30,7 +30,7 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
     // comprobar que el usuari està a la db
     const result = await User.findOne({ username });
     if (result) {
-      console.log('This username is taken');
+      req.flash('validation', 'Este usuario ya existe');
       res.redirect('/auth/signup');
       return;
     }
@@ -80,7 +80,7 @@ router.post('/login', userIsLogged, async (req, res, next) => {
     // comprobar credencials
     const user = await User.findOne({ username });
     if (!user) {
-      console.log('This username is not on db');
+      req.flash('validation', 'El usuario no existe');
       res.redirect('/auth/login');
       return;
     }
@@ -90,7 +90,7 @@ router.post('/login', userIsLogged, async (req, res, next) => {
       res.redirect('/');
       return;
     } else {
-      console.log('Error password!');
+      req.flash('validation', 'La contraseña es incorrecta');
       res.redirect('/auth/login');
       return;
     }
