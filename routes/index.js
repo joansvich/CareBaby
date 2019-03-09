@@ -10,8 +10,12 @@ router.get('/', async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
     const babySitterArray = await User.find({ userType: 'babysitter' });
-    const currentUserJs = await User.findById(currentUser._id);
-    res.render('home', { babySitterArray, currentUserJs });
+    if (currentUser) {
+      const currentUserJs = await User.findById(currentUser._id);
+      res.render('home', { babySitterArray, currentUserJs });
+    }else {
+      res.render('home', { babySitterArray });
+    }
   } catch (error) {
     next(error);
   }
