@@ -9,14 +9,6 @@ var router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const babySitterArray = await User.find({ userType: 'babysitter' });
-
-    // LOGICA
-    // quan parent solicita babysitter --> stateBabysitter = Pending || stateParent = Pending
-    // Babysitter tindrà bullet quant pending i parent no quan està en pending
-    // Quan babysitter contesta --> stateBabysitter = opcio || stateParent = opcio
-    // Parent tindrà bullet quan stateParent sigui Accepted o Decline, babysitter no bullet perque state es opcio
-    // Parent marqui Ok, borrem contracte.
-
     res.render('home', { babySitterArray });
   } catch (error) {
     next(error);
@@ -31,15 +23,25 @@ router.get('/profile', userIsNotLogged, async (req, res, next) => {
   }
 });
 
+// LOGICA MESSAGE
+// Un contrato se crea por defecto con estado: pendiente.
+// Mostrar mensajes cuando:
+// Un padre o canguro ha solicitado canguro y le han aceptado o rechazado.
+// Un canguro ha recibido solicitud de padre o canguro.
+
 router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
     if (currentUser) {
+      // Todos los contratos que ha solicitado el padre o canguro actual a otros canguros.
       const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
+      // Todos los contratos que ha recibido el canguro actual de padres u otros canguros.
       const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).populate('parent');
+      // Contratos que ha recibido la canguro con estado pendiente.
       const filterStateBabysitter = contractBabysitter.filter((babysitter) => {
         return babysitter.state === 'Pendiente';
       });
+      // Contratos de los padres o canguros que han solicitado canguro con estado aceptado o rechazado.
       const filterStateParent = contractParent.filter((parent) => {
         return parent.state !== 'Pendiente';
       });
@@ -50,6 +52,7 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
   }
 });
 
+// El canguro actualiza el estado de la solicitud a 'Aceptado'
 router.get('/profile/message/:id/accept', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -61,6 +64,7 @@ router.get('/profile/message/:id/accept', userIsNotLogged, async (req, res, next
   }
 });
 
+// El canguro actualiza el estado de la solicitud a 'Denegado'
 router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -72,6 +76,7 @@ router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, nex
   }
 });
 
+// Eliminar mensaje después de marcar como recibida la respuesta del canguro.
 router.get('/profile/message/:id/delete', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -84,17 +89,16 @@ router.get('/profile/message/:id/delete', userIsNotLogged, async (req, res, next
 
 router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   const { id } = req.params;
-  const userCookie = req.session.currentUser;
+  const currentUser = req.session.currentUser;
   let isMyUser = false;
   let isBabySitter = false;
   try {
     const userSelected = await User.findById(id);
-    if (id === userCookie._id) {
+    if (id === currentUser._id) {
+      console.log(currentUser.userType);
       isMyUser = true;
-    } else {
-      if (userSelected.userType === 'babysitter') {
-        isBabySitter = true;
-      }
+    } else if (!isMyUser && userSelected.userType === 'babysitter') {
+      isBabySitter = true;
     }
 
     res.render('profile', { userSelected, isMyUser, isBabySitter });
@@ -111,12 +115,14 @@ router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
   }
 });
 
+// Crear contrato
 router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
     const contract = {};
-
+    // Solicitud por parte del usuario logeado
     contract.parent = req.session.currentUser._id;
+    // Canguro que se solicita contratar
     contract.babysitter = id;
     await Contract.create(contract);
 
