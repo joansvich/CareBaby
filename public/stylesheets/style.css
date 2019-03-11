@@ -93,6 +93,7 @@ padding: 1rem;
   align-self: center;
 }
 
+
 .logo {
   padding-left: 10px;
 }
@@ -105,10 +106,15 @@ padding: 1rem;
   padding-right: 20px;
 }
 
-.avatar img {
-  border-radius: 50%;
+.avatar-img {
+  /* cambia estos dos valores para definir el tamaño de tu círculo */
+  height: 45px;
   width: 45px;
-  display: block;
+  /* los siguientes valores son independientes del tamaño del círculo */
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  background-size: cover;
 }
 
 .button {

@@ -24,7 +24,8 @@
   </div>
   <div class="avatar">
     {{#if currentUser}}
-    <a href="/profile/{{currentUserJs._id}}"><img src="{{currentUserJs.imageUrl}}" alt="avatar"></a>
+    {{!-- <img src="{{currentUserJs.imageUrl}}" alt="avatar"> --}}
+    <a href="/profile/{{currentUserJs._id}}"><div class="avatar-img" style="background-image:url({{currentUserJs.imageUrl}})"></div></a>
     {{else}}
     <a href="/profile/{{currentUserJs._id}}"><img src="/images/user.svg" alt="avatar"></a>
     {{/if}}
