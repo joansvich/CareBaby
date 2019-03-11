@@ -70,8 +70,6 @@ router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
     contract.parent = req.session.currentUser._id;
     contract.babysitter = id;
     await Contract.create(contract);
-    const prova = await Contract.find().populate('parent');
-    console.log(prova.parent.username);
 
     res.redirect('/');
   } catch (error) {

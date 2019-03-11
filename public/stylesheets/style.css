@@ -138,6 +138,16 @@ padding: 1rem;
   background: var(--color-delete);
 }
 
+.bullet{
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  top: -7px;
+  right: -7px;
+  border-radius: 50%;
+  background-color: red;
+  z-index: 2;
+}
 .menuToggle
 {
   display: block;
@@ -160,7 +170,7 @@ padding: 1rem;
   cursor: pointer;
   
   opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
+  z-index: 3; /* and place it over the hamburger */
   
   -webkit-touch-callout: none;
 }
