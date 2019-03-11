@@ -58,8 +58,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  app.locals.showBullet = notification(req.session.currentUser);
+app.use(async (req, res, next) => {
+  app.locals.showBullet = await notification(req.session.currentUser);
   next();
 });
 

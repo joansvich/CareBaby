@@ -37,9 +37,46 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
     if (currentUser) {
       const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
       const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).populate('parent');
-
-      res.render('message', { contractParent, contractBabysitter });
+      const filterStateBabysitter = contractBabysitter.filter((babysitter) => {
+        return babysitter.state === 'Pending';
+      });
+      const filterStateParent = contractParent.filter((parent) => {
+        return parent.state !== 'Pending';
+      });
+      res.render('message', { filterStateParent, filterStateBabysitter });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message/:id/accept', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Contract.findByIdAndUpdate(id, { state: 'Aceptado' });
+
+    res.redirect('/profile/message');
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Contract.findByIdAndUpdate(id, { state: 'Denegado' });
+
+    res.redirect('/profile/message');
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message/:id/delete', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Contract.findByIdAndDelete(id);
+    res.redirect('/profile/message');
   } catch (error) {
     next(error);
   }
