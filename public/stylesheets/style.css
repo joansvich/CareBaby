@@ -293,6 +293,11 @@ padding: 1rem;
 .menu a {
   color: var(--dark);
 }
+.menu button {
+  padding: 10px 0;
+  font-size: 22px;
+  color: var(--dark);
+}
 
 /*
 * And let's slide it in from the left
