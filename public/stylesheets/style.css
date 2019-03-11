@@ -93,6 +93,14 @@ padding: 1rem;
   align-self: center;
 }
 
+.logo {
+  padding-left: 10px;
+}
+
+.logo img {
+  height: 30px;
+}
+
 .avatar {
   padding-right: 20px;
 }
@@ -128,7 +136,7 @@ padding: 1rem;
   display: block;
   position: relative;
   top: 25px;
-  left: 25px;   
+  left: 20px;   
   z-index: 1;
 
 }
