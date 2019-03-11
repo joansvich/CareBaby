@@ -12,21 +12,21 @@ const main = async () => {
 
     const map = new mapboxgl.Map(mapOptions);
 
-    if (!navigator.geolocation) {
-      console.log('Geolocation is not supported by your browser');
-    } else {
-      navigator.geolocation.getCurrentPosition(hasLocation, error);
-    }
-
-    function hasLocation (position) {
+    const hasLocation = (position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
       setLocationMarker([longitude, latitude]);
-    }
+    };
 
-    function error (error) {
+    const error = (error) => {
       console.log(error);
+    };
+
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by your browser');
+    } else {
+      navigator.geolocation.getCurrentPosition(hasLocation, error);
     }
 
     // cogemos array de babysitters
@@ -49,7 +49,7 @@ const main = async () => {
         .addTo(map);
     });
 
-    function setLocationMarker (locationArray) {
+    const setLocationMarker = (locationArray) => {
       map.setCenter(locationArray);
       const marker = new mapboxgl.Marker({
         color: 'blue',
@@ -62,7 +62,7 @@ const main = async () => {
         .addTo(map);
 
       map.setZoom(17);
-    }
+    };
   } catch (error) {
 
   }
