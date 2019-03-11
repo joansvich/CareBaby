@@ -26,7 +26,7 @@
     {{#if currentUser}}
     <a href="/profile/{{currentUserJs._id}}"><div class="avatar-img" style="background-image:url({{currentUserJs.imageUrl}})"></div></a>
     {{else}}
-    <a href="/profile/{{currentUserJs._id}}"><img src="/images/user.svg" alt="avatar"></a>
+    <a href="/profile/{{currentUserJs._id}}"><div class="avatar-img" style="background-image:url(/images/user.svg)"></div></a>
     {{/if}}
   </div>
 </header>
