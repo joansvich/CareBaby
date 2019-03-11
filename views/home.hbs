@@ -1,31 +1,46 @@
 {{> navbar}}
 <main>
-  <section>
-    <ul class="cards">
-      {{#each babySitterArray}}
-        <li class="cards-item"> 
-          <div class="cards-img" style="background-image: url({{this.imageUrl}})">
-          </div>
-          <div class="cards-data">
-            <p class="cards-data-name"><a href="/profile/{{this._id}}">{{this.username}}</a></p>
-            <div class="cards-data-location">
-              <img src="/images/pointer.svg" alt="">
-              <p>Barcelona</p>
+  <div class="button-flip">
+    <p>Mostrar lista</p>
+  </div>
+  
+  <div class="scene scene--card">
+    <div class="card">
+      <div class="card__face card__face--front">
+        <div id="map">
+        </div>  
+      </div>
+      <div class="card__face card__face--back">
+        <ul class="cards">
+        {{#each babySitterArray}}
+          <li class="cards-item"> 
+            <div class="cards-img" style="background-image: url({{this.imageUrl}})">
             </div>
-          </div>
-          <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
-        </li>
-      {{/each}}
-    </ul>
-  </section>
+            <div class="cards-data">
+              <p class="cards-data-name"><a href="/profile/{{this._id}}">{{this.username}}</a></p>
+              <div class="cards-data-location">
+                <img src="/images/pointer.svg" alt="">
+                <p>Barcelona</p>
+              </div>
+            </div>
+            <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
+          </li>
+        {{/each}}
+        </ul>
+      </div>
+  </div>
+</div>
+  
 </main>
 
-<div id="map">
 
-</div>
+
+
+
 
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 
-
+<script src="/javascripts/index.js"></script>
 <script src="/javascripts/map.js"></script>
+

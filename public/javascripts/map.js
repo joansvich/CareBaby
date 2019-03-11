@@ -7,7 +7,7 @@ const main = async () => {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [2.1577406, 41.387982],
-      zoom: 15
+      zoom: 13
     };
 
     const map = new mapboxgl.Map(mapOptions);
@@ -24,7 +24,7 @@ const main = async () => {
         .setLngLat(locationArray)
         .addTo(map);
 
-      map.setZoom(17);
+      map.setZoom(13);
     };
 
     const hasLocation = (position) => {
