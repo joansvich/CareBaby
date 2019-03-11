@@ -1,15 +1,14 @@
-const flip = () => {
-  let card = document.querySelector('.card');
-  let flipButton = document.querySelector('.button-flip');
-  flipButton.addEventListener('click', function () {
-    card.classList.toggle('is-flipped');
-    console.log(card.classList.value);
-    if (card.classList.value === 'card') {
-      flipButton.innerHTML = `<p>Mostrar lista</p>`;
+const index = () => {
+  let checkbox = document.querySelector('.checkbox');
+  let overlay = document.querySelector('.overlay');
+  console.log(checkbox);
+  checkbox.addEventListener('click', (click) => {
+    if (click.currentTarget.checked) {
+      overlay.style.width = '100%';
     } else {
-      flipButton.innerHTML = `<p>Mostrar mapa</p>`;
+      overlay.style.width = '0';
     }
   });
 };
 
-window.addEventListener('load', flip);
+window.addEventListener('load', index);
