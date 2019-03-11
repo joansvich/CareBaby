@@ -13,6 +13,8 @@ const MongoStore = require('connect-mongo')(session);
 
 const hbs = require('hbs');
 
+const notification = require('./helpers/notification');
+
 const app = express();
 
 // Session
@@ -53,6 +55,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
+  next();
+});
+
+app.use((req, res, next) => {
+  app.locals.showBullet = notification(req.session.currentUser);
   next();
 });
 

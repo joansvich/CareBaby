@@ -8,27 +8,7 @@ var router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const currentUser = req.session.currentUser;
-    let showBullet = false;
     const babySitterArray = await User.find({ userType: 'babysitter' });
-    if (currentUser) {
-      const contractParent = await Contract.find({ parent: currentUser._id });
-      const contractBabysitter = await Contract.find({ babysitter: currentUser._id });
-      if (contractBabysitter.length > 0) {
-        contractBabysitter.forEach((babysitter) => {
-          if (babysitter.state === 'Pending') {
-            showBullet = true;
-          }
-        });
-      }
-      if (contractParent.length > 0) {
-        contractParent.forEach((parent) => {
-          if (parent.state !== 'Pending') {
-            showBullet = true;
-          }
-        });
-      }
-    }
 
     // LOGICA
     // quan parent solicita babysitter --> stateBabysitter = Pending || stateParent = Pending
@@ -37,12 +17,7 @@ router.get('/', async (req, res, next) => {
     // Parent tindrà bullet quan stateParent sigui Accepted o Decline, babysitter no bullet perque state es opcio
     // Parent marqui Ok, borrem contracte.
 
-    if (currentUser) {
-      const currentUserJs = await User.findById(currentUser._id);
-      res.render('home', { babySitterArray, currentUserJs, showBullet });
-    } else {
-      res.render('home', { babySitterArray });
-    }
+    res.render('home', { babySitterArray });
   } catch (error) {
     next(error);
   }
@@ -59,13 +34,11 @@ router.get('/profile', userIsNotLogged, async (req, res, next) => {
 router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
-    const currentUserJs = await User.findById(currentUser._id);
-
     if (currentUser) {
       const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
       const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).populate('parent');
 
-      res.render('message', { currentUserJs, contractParent, contractBabysitter });
+      res.render('message', { contractParent, contractBabysitter });
     }
   } catch (error) {
     next(error);
@@ -79,7 +52,6 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   let isBabySitter = false;
   try {
     const userSelected = await User.findById(id);
-    const currentUserJs = await User.findById(userCookie._id);
     if (id === userCookie._id) {
       isMyUser = true;
     } else {
@@ -88,7 +60,7 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
       }
     }
 
-    res.render('profile', { userSelected, isMyUser, currentUserJs, isBabySitter });
+    res.render('profile', { userSelected, isMyUser, isBabySitter });
   } catch (error) {
     next(error);
   }
@@ -96,9 +68,7 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
 
 router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const currentUserJs = await User.findById(id);
-    res.render('edit-profile', { currentUserJs });
+    res.render('edit-profile');
   } catch (error) {
     next(error);
   }
@@ -137,7 +107,8 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
       };
     }
 
-    await User.findByIdAndUpdate(id, editUser);
+    const updatedUser = await User.findByIdAndUpdate(id, editUser, { new: true });
+    req.session.currentUser = updatedUser;
     res.redirect(`/profile/${id}`);
   } catch (error) {
     next(error);

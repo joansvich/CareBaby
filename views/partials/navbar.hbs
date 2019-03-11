@@ -32,9 +32,9 @@
   </div>
   <div class="avatar">
     {{#if currentUser}}
-    <a href="/profile/{{currentUserJs._id}}"><div class="avatar-img" style="background-image:url({{currentUserJs.imageUrl}})"></div></a>
+    <a href="/profile/{{currentUser._id}}"><div class="avatar-img" style="background-image:url({{currentUser.imageUrl}})"></div></a>
     {{else}}
-    <a href="/profile/{{currentUserJs._id}}"><div class="avatar-img" style="background-image:url(/images/user.svg)"></div></a>
+    <a href="/profile/{{currentUser._id}}"><div class="avatar-img" style="background-image:url(/images/user.svg)"></div></a>
     {{/if}}
   </div>
 </header>
