@@ -23,6 +23,10 @@
         <button class="button button--delete" type="submit">Borrar cuenta</button>
       </form>
       {{/if}}
+      {{#if isBabySitter}}
+        <a class="button" href="/profile/{{userSelected._id}}/hire">Contratar</a>
+      </form>
+      {{/if}}
     </div>
   </article>
 </section>

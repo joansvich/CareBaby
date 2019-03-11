@@ -33,13 +33,19 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   const { id } = req.params;
   const userCookie = req.session.currentUser;
   let isMyUser = false;
+  let isBabySitter = false;
   try {
-    if (id === userCookie._id) {
-      isMyUser = true;
-    }
     const userSelected = await User.findById(id);
     const currentUserJs = await User.findById(userCookie._id);
-    res.render('profile', { userSelected, isMyUser, currentUserJs });
+    if (id === userCookie._id) {
+      isMyUser = true;
+    } else {
+      if (userSelected.userType === 'babysitter') {
+        isBabySitter = true;
+      }
+    }
+
+    res.render('profile', { userSelected, isMyUser, currentUserJs, isBabySitter });
   } catch (error) {
     next(error);
   }
@@ -50,6 +56,24 @@ router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
     const { id } = req.params;
     const currentUserJs = await User.findById(id);
     res.render('edit-profile', { currentUserJs });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const currentUserJs = await User.findById(id);
+    const contract = {};
+
+    contract.parent = req.session.currentUser._id;
+    contract.babysitter = id;
+    await Contract.create(contract);
+    const prova = await Contract.find().populate('parent');
+    console.log(prova.parent.username);
+
+    res.redirect('/');
   } catch (error) {
     next(error);
   }
