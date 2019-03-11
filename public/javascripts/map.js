@@ -12,6 +12,21 @@ const main = async () => {
 
     const map = new mapboxgl.Map(mapOptions);
 
+    const setLocationMarker = (locationArray) => {
+      map.setCenter(locationArray);
+      const marker = new mapboxgl.Marker({
+        color: 'blue',
+        offset: {
+          x: -20,
+          y: -20
+        }
+      })
+        .setLngLat(locationArray)
+        .addTo(map);
+
+      map.setZoom(17);
+    };
+
     const hasLocation = (position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
@@ -48,21 +63,6 @@ const main = async () => {
         .setLngLat(babysitter.location.coordinates)
         .addTo(map);
     });
-
-    const setLocationMarker = (locationArray) => {
-      map.setCenter(locationArray);
-      const marker = new mapboxgl.Marker({
-        color: 'blue',
-        offset: {
-          x: -20,
-          y: -20
-        }
-      })
-        .setLngLat(locationArray)
-        .addTo(map);
-
-      map.setZoom(17);
-    };
   } catch (error) {
 
   }
