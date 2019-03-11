@@ -38,10 +38,10 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
       const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
       const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).populate('parent');
       const filterStateBabysitter = contractBabysitter.filter((babysitter) => {
-        return babysitter.state === 'Pending';
+        return babysitter.state === 'Pendiente';
       });
       const filterStateParent = contractParent.filter((parent) => {
-        return parent.state !== 'Pending';
+        return parent.state !== 'Pendiente';
       });
       res.render('message', { filterStateParent, filterStateBabysitter });
     }

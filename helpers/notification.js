@@ -5,19 +5,18 @@ const checkBullet = async (currentUser) => {
     console.log(currentUser);
     let showBullet = false;
     if (currentUser) {
-      console.log('estoy dentro');
       const contractParent = await Contract.find({ parent: currentUser._id }).lean();
       const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).lean();
       if (contractBabysitter.length > 0) {
         contractBabysitter.forEach((babysitter) => {
-          if (babysitter.state === 'Pending') {
+          if (babysitter.state === 'Pendiente') {
             showBullet = true;
           }
         });
       }
       if (contractParent.length > 0) {
         contractParent.forEach((parent) => {
-          if (parent.state !== 'Pending') {
+          if (parent.state !== 'Pendiente') {
             showBullet = true;
           }
         });
