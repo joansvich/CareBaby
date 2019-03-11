@@ -4,8 +4,7 @@
     <ul class="cards">
       {{#each babySitterArray}}
         <li class="cards-item"> 
-          <div class="cards-img">
-            <img src="{{this.imageUrl}}" alt="">
+          <div class="cards-img" style="background-image: url({{this.imageUrl}})">
           </div>
           <div class="cards-data">
             <p class="cards-data-name"><a href="/profile/{{this._id}}">{{this.username}}</a></p>
@@ -25,11 +24,6 @@
 
 </div>
 
-<div class="list-baby">
-  <ul>
-
-  </ul>
-</div>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 

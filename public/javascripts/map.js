@@ -48,10 +48,6 @@ const main = async () => {
     const arrayBabysitters = await searchBabysitters();
 
     arrayBabysitters.forEach(babysitter => {
-      // console.log(babysitter);
-      // console.log(babysitter.location.coordinates);
-      console.log(babysitter.location.coordinates);
-
       // add marker to map
       new mapboxgl.Marker({
         color: 'red',
@@ -77,13 +73,6 @@ const searchBabysitters = async () => {
       // errorElement.style.visibility = 'visible';
     }
     const arrayBabysitters = await babysitterRequest.json();
-    const userListElement = document.querySelector('.list-baby ul');
-    arrayBabysitters.forEach(babysitter => {
-      let node = document.createElement('li');
-      let textnode = document.createTextNode(babysitter.username);
-      node.appendChild(textnode);
-      userListElement.appendChild(node);
-    });
     return arrayBabysitters;
   } catch (error) {
     console.error(error);
