@@ -1,7 +1,9 @@
 <header class="top-bar">
   <nav>
     <div class="menuToggle">
-      <div class="bullet"></div>
+      {{#if showBullet}}
+        <div class="bullet"></div>
+      {{/if}}
       <input type="checkbox" />
       <!-- Some spans to act as a hamburger -->
       <span></span>
@@ -10,6 +12,11 @@
       <ul class="menu">
         <li><a href="/">Home</a></li>
         {{#if currentUser}}
+          {{#if showBullet}}
+            <li><span class="message-unread"><a href="/profile/message">Mensajes</a></span></li>
+          {{else}}
+            <li><a href="/profile/message">Mensajes</a></li>
+          {{/if}}
         <form action="/auth/logout" method="post">
           <li><button type="submit">Log Out</button></li>
         </form>

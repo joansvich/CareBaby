@@ -1,5 +1,34 @@
 {{> navbar}}
 
 <section>
-  
+  {{#each contractBabysitter}}
+        <li class="cards-item"> 
+          <div class="cards-img avatar--large" style="background-image: url({{this.parent.imageUrl}})">
+          </div>
+          <div class="cards-data">
+            <p class="cards-data-name extra--vertical--margin"><a href="/profile/{{this.parent._id}}">{{this.parent.username}}</a></p>
+            <div class="cards-data-location extra--vertical--margin">
+              <p>Ha solicitado tus servicios</p>
+            </div>
+            <div>
+              <button class="button button--small" type="submit">Aceptar</button>
+              <button class="button button--delete button--small" type="submit">Declinar</button>
+            </div>
+          </div>
+        </li>
+    {{/each}} 
+    {{#each contractParent}}
+        <li class="cards-item"> 
+          <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
+          </div>
+          <div class="cards-data">
+            <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
+            <div class="cards-data-location">
+              <img src="/images/pointer.svg" alt="">
+              <p>Barcelona</p>
+            </div>
+          </div>
+          <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
+        </li>
+    {{/each}}
 </section>

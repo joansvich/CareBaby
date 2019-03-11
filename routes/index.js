@@ -9,10 +9,37 @@ var router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
+    let showBullet = false;
     const babySitterArray = await User.find({ userType: 'babysitter' });
     if (currentUser) {
+      const contractParent = await Contract.find({ parent: currentUser._id });
+      const contractBabysitter = await Contract.find({ babysitter: currentUser._id });
+      if (contractBabysitter.length > 0) {
+        contractBabysitter.forEach((babysitter) => {
+          if (babysitter.state === 'Pending') {
+            showBullet = true;
+          }
+        });
+      }
+      if (contractParent.length > 0) {
+        contractParent.forEach((parent) => {
+          if (parent.state !== 'Pending') {
+            showBullet = true;
+          }
+        });
+      }
+    }
+
+    // LOGICA
+    // quan parent solicita babysitter --> stateBabysitter = Pending || stateParent = Pending
+    // Babysitter tindrà bullet quant pending i parent no quan està en pending
+    // Quan babysitter contesta --> stateBabysitter = opcio || stateParent = opcio
+    // Parent tindrà bullet quan stateParent sigui Accepted o Decline, babysitter no bullet perque state es opcio
+    // Parent marqui Ok, borrem contracte.
+
+    if (currentUser) {
       const currentUserJs = await User.findById(currentUser._id);
-      res.render('home', { babySitterArray, currentUserJs });
+      res.render('home', { babySitterArray, currentUserJs, showBullet });
     } else {
       res.render('home', { babySitterArray });
     }
@@ -24,6 +51,22 @@ router.get('/', async (req, res, next) => {
 router.get('/profile', userIsNotLogged, async (req, res, next) => {
   try {
     res.redirect('/');
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
+  try {
+    const currentUser = req.session.currentUser;
+    const currentUserJs = await User.findById(currentUser._id);
+
+    if (currentUser) {
+      const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
+      const contractBabysitter = await Contract.find({ babysitter: currentUser._id }).populate('parent');
+
+      res.render('message', { currentUserJs, contractParent, contractBabysitter });
+    }
   } catch (error) {
     next(error);
   }
@@ -64,7 +107,6 @@ router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
 router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const currentUserJs = await User.findById(id);
     const contract = {};
 
     contract.parent = req.session.currentUser._id;

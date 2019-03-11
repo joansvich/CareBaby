@@ -13,6 +13,11 @@ const contractSchema = new Schema({
   babysitter: {
     type: ObjectId,
     ref: 'User'
+  },
+  state: {
+    type: String,
+    enum: ['Accepted', 'Decline', 'Pending'],
+    default: 'Pending'
   }
 });
 

@@ -118,6 +118,7 @@ padding: 1rem;
   background-size: cover;
 }
 
+
 .button {
   display: inline-block;
   color: var(--white);
@@ -138,6 +139,25 @@ padding: 1rem;
   background: var(--color-delete);
 }
 
+.button--small {
+  display: inline-block;
+    color: var(--white);
+    padding: 0.2rem 0.7rem;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 0; 
+    font-size: var(--font-size-xs); 
+    line-height: 1.5rem;
+}
+
+.extra--vertical--margin{
+  margin: 5px 0;
+}
+
 .bullet{
   position: absolute;
   width: 13px;
@@ -147,6 +167,10 @@ padding: 1rem;
   border-radius: 50%;
   background-color: red;
   z-index: 2;
+}
+
+.message-unread {
+  font-weight: 700;
 }
 .menuToggle
 {
@@ -312,6 +336,10 @@ padding: 1rem;
   background-size: cover;
 }
 
+.avatar--large{
+  height: 110px;
+  width: 110px;
+}
 
 .cards-data {
   display: flex;
@@ -362,11 +390,6 @@ input.cards-data-name{
   background-size: cover;
 }
 
-/* .profile-details-avatar img {
-  border-radius: 50%;
-  display: block;
-  width: 100%;
-} */
 
 .profile-details-info {
   display: flex;
