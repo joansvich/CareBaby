@@ -90,6 +90,7 @@ router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, ne
   }
 });
 
+// Positive feedback
 router.get('/profile/message/:id/feedback/yes', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -107,11 +108,15 @@ router.get('/profile/message/:id/feedback/yes', userIsNotLogged, async (req, res
   }
 });
 
+// Negative feedback
 router.get('/profile/message/:id/feedback/no', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
-    res.redirect('/profile/message');
+    const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    const babysitter = await User.findById(contract.babysitter);
+    let totalFeedback = babysitter.totalFeedback;
+    await User.findByIdAndUpdate(contract.babysitter, { totalFeedback });
+    res.redirect(`/profile/message/${id}/delete`);
   } catch (error) {
     next(error);
   }
