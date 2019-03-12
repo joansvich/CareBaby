@@ -15,7 +15,6 @@ const index = () => {
 
   // Toggle map
   const handleClickToggleMap = (event) => {
-    console.log(event.target);
     if (event.target) {
       map.classList.toggle('toggle-map');
       mapArrowImage.classList.toggle('arrow-img--rotate');

@@ -41,14 +41,15 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
       const filterStateBabysitter = contractBabysitter.filter((babysitter) => {
         return babysitter.state === 'Pendiente';
       });
-      const filterFeedback = contractParent.filter((contract) => {
+      // Contratos de los padres o conguros que han solicitado canguro con estado feedback.
+      const filterStateFeedback = contractParent.filter((contract) => {
         return contract.state === 'Feedback';
       });
       // Contratos de los padres o canguros que han solicitado canguro con estado aceptado o rechazado.
       const filterStateParent = contractParent.filter((parent) => {
         return parent.state !== 'Pendiente' && parent.state !== 'Feedback';
       });
-      res.render('message', { filterStateParent, filterStateBabysitter, filterFeedback });
+      res.render('message', { filterStateParent, filterStateBabysitter, filterStateFeedback });
     }
   } catch (error) {
     next(error);
