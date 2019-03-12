@@ -48,35 +48,25 @@ const main = async () => {
     const arrayBabysitters = await searchBabysitters();
 
     arrayBabysitters.forEach(babysitter => {
-      // add marker to map
-      new mapboxgl.Marker({
-        color: 'red',
-        offset: {
-          x: -20,
-          y: -20
-        }
-      })
+      var el = document.createElement('div');
+      el.className = 'marker';
+      el.style.background = babysitter.imageUrl;
+
+      new mapboxgl.Marker(el)
         .setLngLat(babysitter.location.coordinates)
-        .addTo(map);
-    });
-
-    // When a click event occurs on a feature in the places layer, open a popup at the
-    // location of the feature, with description HTML from its properties.
-
-    arrayBabysitters.on('click', 'places', function (e) {
-      var coordinates = e.location.coordinates.slice();
-      var description = e.description;
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(description)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(`
+          <div class="popup">
+            <div class="popup-img">
+              <div class="popup-img-avatar" style="background-image:url(${babysitter.imageUrl})"></div>
+            </div>
+            <div class="popup-details">
+              <p class="popup-details-name"><a href="/profile/${babysitter._id}">${babysitter.username}</a></p>
+              <p>Barcelona</p>
+              <p>XXXXX</p>
+            </div>
+          </div>
+          `))
         .addTo(map);
     });
   } catch (error) {

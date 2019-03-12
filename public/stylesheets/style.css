@@ -277,6 +277,52 @@ section {
 * Make this absolute positioned
 * at the top left of the screen
 */
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+.marker {
+  background-image: url('/images/babyBottle.png');
+  background-size: cover;
+  width: 27px;
+  height: 51px; 
+  cursor: pointer;
+}
+
+.popup {
+  display: flex;
+  flex-direction: row;
+}
+.popup-img {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.popup-img-avatar {
+  align-items: center;
+  height: 60px;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.popup-details{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 0 var(--font-size-medium);
+}
+
+.popup-details-name {
+  font-size: var(--font-size-large);
+  color: var(--dark);
+  font-weight: 600;
+}
+
 .menu
 {
   position: fixed;
