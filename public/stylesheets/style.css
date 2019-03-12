@@ -209,8 +209,6 @@ section {
   
   opacity: 0; /* hide this */
   z-index: 3; /* and place it over the hamburger */
-  
-  -webkit-touch-callout: none;
 }
 
 /*
@@ -245,7 +243,10 @@ section {
 {
   transform-origin: 0% 100%;
 }
-
+/* Hide bullet when menu is open */
+.menuToggle input:checked + .bullet{
+  display: none;
+}
 /* 
 * Transform all the slices of hamburger
 * into a crossmark.
