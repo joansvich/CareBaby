@@ -11,7 +11,9 @@ const main = async () => {
     };
 
     const map = new mapboxgl.Map(mapOptions);
-
+    var geocoder = new MapboxGeocoder({
+	    accessToken: mapboxgl.accessToken
+    });
     const setLocationMarker = (locationArray) => {
       map.setCenter(locationArray);
       const marker = new mapboxgl.Marker({
@@ -62,13 +64,17 @@ const main = async () => {
             </div>
             <div class="popup-details">
               <p class="popup-details-name"><a href="/profile/${babysitter._id}">${babysitter.username}</a></p>
-              <p>Barcelona</p>
+              <p>${babysitter.city}</p>
               <p>XXXXX</p>
             </div>
           </div>
           `))
         .addTo(map);
     });
+
+    map.addControl(new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken
+    }));
   } catch (error) {
 
   }
