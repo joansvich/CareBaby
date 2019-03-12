@@ -488,13 +488,12 @@ input.cards-data-name{
 }
 
 .map-container{
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
   overflow: hidden;
   margin-bottom: -100vh;
-  /* overflow: visible; */
   transition: margin 0.5s ease;
 }
 
