@@ -209,8 +209,6 @@ section {
   
   opacity: 0; /* hide this */
   z-index: 3; /* and place it over the hamburger */
-  
-  -webkit-touch-callout: none;
 }
 
 /*
@@ -245,7 +243,10 @@ section {
 {
   transform-origin: 0% 100%;
 }
-
+/* Hide bullet when menu is open */
+.menuToggle input:checked + .bullet{
+  display: none;
+}
 /* 
 * Transform all the slices of hamburger
 * into a crossmark.
@@ -493,8 +494,7 @@ input.cards-data-name{
   width: 100vw;
   overflow: hidden;
   margin-bottom: -100vh;
-  overflow: visible;
-  cursor: pointer;
+  /* overflow: visible; */
   transition: margin 0.5s ease;
 }
 
@@ -503,18 +503,33 @@ input.cards-data-name{
   width: 100%;
 }
 
-.toggle{
-  margin-bottom: -100px;
+.toggle-map{
+  margin-bottom: -125px;
 }
 
 .arrow-container{
   position: relative;
   display: flex;
   justify-content: center;
-  height: 20px;
+  height: 30px;
   width: 100%;
   background-color:var(--light-gray);
   border-top: 1px solid var(--color-border);
+}
+
+.arrow-slide-toogle{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.map-text{
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  margin-top: 3px;
 }
 
 .arrow-bg{
@@ -526,15 +541,15 @@ input.cards-data-name{
   height: 48px;
 }
 
-.arrow-toggle{
+.arrow-img{
   display: block;
-  width: 24px;
+  width: 22px;
   height: auto;
   margin: 4px auto 0;
   transform: rotate(270deg);
 }
 
-.rotate{
+.arrow-img--rotate{
   transform: rotate(90deg);
 }
 

@@ -2,8 +2,10 @@ const index = () => {
   const checkbox = document.querySelector('.checkbox');
   const overlay = document.querySelector('.overlay');
 
+  const arrow = document.querySelector('.arrow-slide-toogle');
   const map = document.querySelector('.map-container');
-  const mapArrow = document.querySelector('.arrow-toggle');
+  const mapArrowImage = document.querySelector('.arrow-img');
+  const mapText = document.querySelector('.map-text');
 
   // Menu
   const handleClick = (event) => {
@@ -13,11 +15,18 @@ const index = () => {
 
   // Toggle map
   const handleClickToggleMap = (event) => {
+    console.log(event.target);
     if (event.target) {
-      map.classList.toggle('toggle');
-      mapArrow.classList.toggle('rotate');
+      map.classList.toggle('toggle-map');
+      mapArrowImage.classList.toggle('arrow-img--rotate');
+      // Toggle text
+      if (mapText.innerHTML === 'Ver mapa') {
+        mapText.innerHTML = 'Ocultar mapa';
+      } else if (mapText.innerHTML === 'Ocultar mapa') {
+        mapText.innerHTML = 'Ver mapa';
+      }
     }
   };
-  map.addEventListener('click', handleClickToggleMap);
+  arrow.addEventListener('click', handleClickToggleMap);
 };
 window.addEventListener('load', index);

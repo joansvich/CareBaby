@@ -3,26 +3,29 @@
   <section>
     <ul class="cards">
       {{#each babySitterArray}}
-        <li class="cards-item"> 
-          <div class="cards-img" style="background-image: url({{this.imageUrl}})">
+      <li class="cards-item">
+        <div class="cards-img" style="background-image: url({{this.imageUrl}})">
+        </div>
+        <div class="cards-data">
+          <p class="cards-data-name"><a href="/profile/{{this._id}}">{{this.username}}</a></p>
+          <div class="cards-data-location">
+            <img src="/images/pointer.svg" alt="">
+            <p>Barcelona</p>
           </div>
-          <div class="cards-data">
-            <p class="cards-data-name"><a href="/profile/{{this._id}}">{{this.username}}</a></p>
-            <div class="cards-data-location">
-              <img src="/images/pointer.svg" alt="">
-              <p>{{this.city}}</p>
-            </div>
-          </div>
-          <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
-        </li>
+        </div>
+        <img class="cards-item-arrow" src="/images/arrow.svg" alt="" sizes="" srcset="">
+      </li>
       {{/each}}
     </ul>
   </section>
 </main>
 <div class="map-container">
   <div class="arrow-container">
-    <div class="arrow-bg">
-      <img class="arrow-toggle" src="/images/arrow.svg" alt="Arrow">
+    <div class="arrow-slide-toogle">
+      <p class="map-text">Ver mapa</p>
+      <div class="arrow-bg">
+        <img class="arrow-img" src="/images/arrow.svg" alt="Arrow">
+      </div>
     </div>
   </div>
   <div id="map"></div>
@@ -31,5 +34,5 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 
-
+<script src="/javascripts/index.js"></script>
 <script src="/javascripts/map.js"></script>
