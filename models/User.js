@@ -33,6 +33,14 @@ const userSchema = new Schema({
   imageUrl: {
     type: String,
     default: '/images/user.svg'
+  },
+  totalFeedback: {
+    type: Number,
+    default: 0
+  },
+  positiveFeedback: {
+    type: Number,
+    default: 0
   }
 });
 
