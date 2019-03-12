@@ -115,6 +115,7 @@ router.get('/profile/message/:id/feedback/no', userIsNotLogged, async (req, res,
     const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
     const babysitter = await User.findById(contract.babysitter);
     let totalFeedback = babysitter.totalFeedback;
+    totalFeedback++;
     await User.findByIdAndUpdate(contract.babysitter, { totalFeedback });
     res.redirect(`/profile/message/${id}/delete`);
   } catch (error) {
