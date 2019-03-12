@@ -2,34 +2,51 @@
 
 <section>
   {{#each filterStateBabysitter}}
-        <li class="cards-item"> 
-          <div class="cards-img avatar--large" style="background-image: url({{this.parent.imageUrl}})">
-          </div>
-          <div class="cards-data">
-            <p class="cards-data-name extra--vertical--margin"><a href="/profile/{{this.parent._id}}">{{this.parent.username}}</a></p>
-            <div class="cards-data-location extra--vertical--margin">
-              <p>Ha solicitado tus servicios</p>
-            </div>
-            <div>
-              <a class="button button--small" href="/profile/message/{{this._id}}/accept">Aceptar</a>
-              <a class="button button--delete button--small" href="/profile/message/{{this._id}}/decline">Rechazar</a>
-            </div>
-          </div>
-        </li>
-    {{/each}} 
-    {{#each filterStateParent}}
-        <li class="cards-item"> 
-          <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
-          </div>
-          <div class="cards-data">
-            <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
-            <div class="cards-data-location extra--vertical--margin">
-              <p>Estado de tu solicitud: {{this.state}}</p>
-            </div>
-            <div>
-              <a class="button button--small" href="/profile/message/{{this._id}}/delete">Recibido</a>
-            </div>
-          </div>
-        </li>
-    {{/each}}
+  <li class="cards-item">
+    <div class="cards-img avatar--large" style="background-image: url({{this.parent.imageUrl}})">
+    </div>
+    <div class="cards-data">
+      <p class="cards-data-name extra--vertical--margin"><a
+          href="/profile/{{this.parent._id}}">{{this.parent.username}}</a></p>
+      <div class="cards-data-location extra--vertical--margin">
+        <p>Ha solicitado tus servicios</p>
+      </div>
+      <div>
+        <a class="button button--small" href="/profile/message/{{this._id}}/accept">Aceptar</a>
+        <a class="button button--delete button--small" href="/profile/message/{{this._id}}/decline">Rechazar</a>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+  {{#each filterStateParent}}
+  <li class="cards-item">
+    <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
+    </div>
+    <div class="cards-data">
+      <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
+      <div class="cards-data-location extra--vertical--margin">
+        <p>Estado de tu solicitud: {{this.state}}</p>
+      </div>
+      <div>
+        <a class="button button--small" href="/profile/message/{{this._id}}/feedback">Valorar a {{this.babysitter.username}}</a>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+  {{#each filterFeedback}}
+  <li class="cards-item">
+    <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
+    </div>
+    <div class="cards-data">
+      <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
+      <div class="cards-data-location extra--vertical--margin">
+        <p>¿Te ha gustado el servicio?</p>
+      </div>
+      <div>
+        <a class="button button--small" href="/profile/message/{{this._id}}/feedback/yes">Sí</a>
+        <a class="button button--delete button--small" href="/profile/message/{{this._id}}/feedback/no">No</a>
+      </div>
+    </div>
+  </li>
+  {{/each}}
 </section>

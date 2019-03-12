@@ -41,11 +41,14 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
       const filterStateBabysitter = contractBabysitter.filter((babysitter) => {
         return babysitter.state === 'Pendiente';
       });
+      const filterFeedback = contractParent.filter((contract) => {
+        return contract.state === 'Feedback';
+      });
       // Contratos de los padres o canguros que han solicitado canguro con estado aceptado o rechazado.
       const filterStateParent = contractParent.filter((parent) => {
-        return parent.state !== 'Pendiente';
+        return parent.state !== 'Pendiente' && parent.state !== 'Feedback';
       });
-      res.render('message', { filterStateParent, filterStateBabysitter });
+      res.render('message', { filterStateParent, filterStateBabysitter, filterFeedback });
     }
   } catch (error) {
     next(error);
@@ -70,6 +73,44 @@ router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, nex
     const { id } = req.params;
     await Contract.findByIdAndUpdate(id, { state: 'Denegado' });
 
+    res.redirect('/profile/message');
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Feedback
+router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    res.redirect('/profile/message');
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message/:id/feedback/yes', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    const babysitter = await User.findById(contract.babysitter);
+    let totalFeedback = babysitter.totalFeedback;
+    let positiveFeedback = babysitter.positiveFeedback;
+    totalFeedback++;
+    positiveFeedback++;
+    await User.findByIdAndUpdate(contract.babysitter, { totalFeedback, positiveFeedback });
+
+    res.redirect(`/profile/message/${id}/delete`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/profile/message/:id/feedback/no', userIsNotLogged, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
     res.redirect('/profile/message');
   } catch (error) {
     next(error);
