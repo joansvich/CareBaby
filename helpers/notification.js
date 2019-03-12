@@ -36,3 +36,14 @@ const checkBullet = async (currentUser) => {
 };
 
 module.exports = checkBullet;
+
+function findOdd (A) {
+  let sum = 0;
+  A.forEach((b) => {
+    if (b % 1 !== 0) {
+      sum++;
+    }
+  });
+
+  return sum;
+}

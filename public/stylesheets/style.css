@@ -280,9 +280,9 @@ section {
 .menu
 {
   position: fixed;
-  width: 300px;
+  width: 250px;
   top: 0;
-  left: -300px;
+  left: -250px;
   height: 100vh;
   padding: 50px;
   padding-top: 125px;
