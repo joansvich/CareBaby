@@ -1,16 +1,32 @@
-<h1>Registro</h1>
-<form action="/auth/signup" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <p>Selecciona que tipo de usuario eres:</p>
-  <input type="radio" name="userType" value="babysitter">Canguro
-  <input type="radio" name="userType" value="parent">Padres
-  <input type="text"  name="latitude" class="input-latitude" />
-  <input type="text"  name="longitude" class="input-longitude" />
-  <input type="text"  name="location" class="input-location" />
-  <button class="button" type="submit">Registrar</button>
-</form>
+{{> navbar}}
+<main>
+  <section class="signup">
+    <h1 class="signup-title">Registro</h1>
+    <form class="signup-form" action="/auth/signup" method="post">
+      <input class="signup-input" type="text" name="username" placeholder="Usuario">
+      <input class="signup-input" type="password" name="password" placeholder="Contraseña">
+      <h3>Selecciona que tipo de usuario eres:</h3>
 
-{{> flash}}
+      <div class="input-radio">
+        <label class="container">Canguro
+          <input type="radio" checked="checked" name="userType" value="babysitter">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Padres
+          <input type="radio" name="userType" value="parent">
+          <span class="checkmark"></span>
+        </label>
+        {{!-- <input type="radio" name="userType" value="babysitter">Canguro
+        <input type="radio" name="userType" value="parent">Padres --}}
+      </div>
+
+      <input hidden type="text" name="latitude" class="input-latitude" />
+      <input hidden type="text" name="longitude" class="input-longitude" />
+      <input hidden type="text" name="location" class="input-location" />
+      <button class="button" type="submit">Registrar</button>
+    </form>
+    {{> flash}}
+  </section>
+</main>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.4/mapbox-gl-geocoder.min.js'></script>
 <script src="/javascripts/signup.js"></script>
