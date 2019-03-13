@@ -595,6 +595,10 @@ input.cards-data-name {
 
 .login-title, .signup-title{
   text-align: center;
+  font-size: 30px;
+  color: var( --dark);
+  font-weight: 600;
+  margin-top: 12px;
 }
 
 .login-form, .signup-form{
