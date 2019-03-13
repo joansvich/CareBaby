@@ -201,7 +201,7 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
       editUser = {
         username,
         description,
-        imageUrl: req.file.url
+        imageUrl: req.file.secure_url
       };
     } else {
       editUser = {
