@@ -8,12 +8,12 @@
   --light-gray: #dddddd;
   --color-border: #ccc;
   --color-delete: #F44336;
-
   --font-size-xs: 10px;
   --font-size-small: 14px;
   --font-size-normal: 16px;
-  --font-size-medium: 18px;
+  --font-size-medium: 20px;
   --font-size-large: 24px;
+  --font-size-extra-large: 32px;
 }
 
 /* ---- reset ---- */
@@ -21,6 +21,7 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -59,17 +60,16 @@ a {
   color: var(--dark);
 }
 
-a:hover
- {
-   color: var(--color-primary-hover);
- }
+a:hover {
+  color: var(--color-primary-hover);
+}
 
-textarea, input{
+textarea, input {
   font-size: 1rem;
   border: 1px solid var(--light-gray);
   border-radius: 3px;
   padding: 0.75rem;
-  width:100%;
+  width: 100%;
 }
 
 .container {
@@ -78,7 +78,7 @@ textarea, input{
 
 section {
   padding: 1rem;
-} 
+}
 
 /* ---- components ---- */
 
@@ -93,7 +93,7 @@ section {
   opacity: 1;
   z-index: 1;
   transition: all 0.3s ease-in-out;
-} 
+}
 
 .top-bar {
   display: flex;
@@ -107,7 +107,6 @@ section {
 .logo, .avatar {
   align-self: center;
 }
-
 
 .logo {
   padding-left: 10px;
@@ -132,7 +131,6 @@ section {
   background-size: cover;
 }
 
-
 .button {
   display: inline-block;
   color: var(--white);
@@ -149,30 +147,30 @@ section {
   line-height: 1.5rem;
 }
 
-.button--delete{
+.button--delete {
   background: var(--color-delete);
 }
 
 .button--small {
   display: inline-block;
-    color: var(--white);
-    padding: 0.2rem 0.7rem;
-    letter-spacing: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-    border-radius: 25px;
-    cursor: pointer;
-    margin: 0; 
-    font-size: var(--font-size-xs); 
-    line-height: 1.5rem;
+  color: var(--white);
+  padding: 0.2rem 0.7rem;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.5rem;
 }
 
-.extra--vertical--margin{
+.extra--vertical--margin {
   margin: 5px 0;
 }
 
-.bullet{
+.bullet {
   position: absolute;
   width: 13px;
   height: 13px;
@@ -186,73 +184,66 @@ section {
 .message-unread {
   font-weight: 700;
 }
-.menuToggle
-{
+
+.menuToggle {
   display: block;
   position: relative;
   top: 25px;
-  left: 20px;   
+  left: 20px;
   z-index: 1;
-
 }
 
-.menuToggle input
-{
+.menuToggle input {
   display: block;
   width: 40px;
   height: 32px;
   position: absolute;
   top: -7px;
   left: -5px;
-  
   cursor: pointer;
-  
-  opacity: 0; /* hide this */
-  z-index: 3; /* and place it over the hamburger */
+  opacity: 0;
+  /* hide this */
+  z-index: 3;
+  /* and place it over the hamburger */
 }
 
 /*
 * Just a quick hamburger
 */
-.menuToggle span
-{
+
+.menuToggle span {
   display: block;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  
   background: var(--white);
   border-radius: 3px;
-  
   z-index: 1;
-  
   transform-origin: 4px 0px;
-  
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
 }
 
-.menuToggle span:first-child
-{
+.menuToggle span:first-child {
   transform-origin: 0% 0%;
 }
 
-.menuToggle span:nth-last-child(2)
-{
+.menuToggle span:nth-last-child(2) {
   transform-origin: 0% 100%;
 }
+
 /* Hide bullet when menu is open */
-.menuToggle input:checked + .bullet{
+
+.menuToggle input:checked+.bullet {
   display: none;
 }
+
 /* 
 * Transform all the slices of hamburger
 * into a crossmark.
 */
-.menuToggle input:checked ~ span
-{
+
+.menuToggle input:checked~span {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: #232323;
@@ -261,8 +252,8 @@ section {
 /*
 * But let's hide the middle one.
 */
-.menuToggle input:checked ~ span:nth-last-child(3)
-{
+
+.menuToggle input:checked~span:nth-last-child(3) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
@@ -270,8 +261,8 @@ section {
 /*
 * Ohyeah and the last one should go the other direction
 */
-.menuToggle input:checked ~ span:nth-last-child(2)
-{
+
+.menuToggle input:checked~span:nth-last-child(2) {
   transform: rotate(-45deg) translate(0, -1px);
 }
 
@@ -283,11 +274,12 @@ section {
 .mapboxgl-popup {
   max-width: 200px;
 }
+
 .marker {
   background-image: url('/images/babyBottle.png');
   background-size: cover;
   width: 27px;
-  height: 51px; 
+  height: 51px;
   cursor: pointer;
 }
 
@@ -295,6 +287,7 @@ section {
   display: flex;
   flex-direction: row;
 }
+
 .popup-img {
   display: flex;
   flex-direction: row;
@@ -311,7 +304,7 @@ section {
   background-size: cover;
 }
 
-.popup-details{
+.popup-details {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -325,8 +318,7 @@ section {
   font-weight: 600;
 }
 
-.menu
-{
+.menu {
   position: fixed;
   width: 250px;
   top: 0;
@@ -339,15 +331,12 @@ section {
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
-  
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-  
-  transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
 
-.menu li
-{
+.menu li {
   padding: 10px 0;
   font-size: 22px;
 }
@@ -355,6 +344,7 @@ section {
 .menu a {
   color: var(--dark);
 }
+
 .menu button {
   padding: 10px 0;
   font-size: 22px;
@@ -364,8 +354,8 @@ section {
 /*
 * And let's slide it in from the left
 */
-.menuToggle input:checked ~ ul
-{
+
+.menuToggle input:checked~ul {
   transform: none;
   left: 0;
 }
@@ -376,16 +366,29 @@ section {
   flex-wrap: wrap;
 }
 
+.cards-title {
+  font-size: 30px;
+  color: var( --dark);
+  font-weight: 600;
+  margin-top: 12px;
+  padding-bottom: 24px;
+  text-align: center;
+}
+
 .cards-item {
   position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  padding: var(--font-size-xs) 0;
+  padding: var(--font-size-xs);
+  /* border: 0.5px solid var(--color-primary); */
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28)
 }
 
-.cards-item-arrow{
+.cards-item-arrow {
   position: absolute;
   right: 0;
   top: 39px;
@@ -393,7 +396,7 @@ section {
   height: auto;
 }
 
-.cards-img{
+.cards-img {
   /* cambia estos dos valores para definir el tamaño de tu círculo */
   height: 80px;
   width: 80px;
@@ -404,7 +407,7 @@ section {
   background-size: cover;
 }
 
-.avatar--large{
+.avatar--large {
   height: 110px;
   width: 110px;
 }
@@ -417,13 +420,13 @@ section {
   padding-left: 1rem;
 }
 
-.cards-data-name{
+.cards-data-name {
   font-size: var(--font-size-large);
   color: var(--dark);
   font-weight: 600;
 }
 
-input.cards-data-name{
+input.cards-data-name {
   width: 100%;
 }
 
@@ -433,9 +436,14 @@ input.cards-data-name{
   align-items: center;
 }
 
-.cards-data-location img{
+.cards-data-location-city {
+  padding-left: 4px;
+  margin: 4px 0;
+}
+
+.cards-data-location img {
   width: 15px;
-  height: auto;
+  height: 16px;
 }
 
 /* Profile view */
@@ -446,7 +454,7 @@ input.cards-data-name{
   flex-wrap: wrap;
 }
 
-.profile-details-avatar{
+.profile-details-avatar {
   align-items: center;
   /* cambia estos dos valores para definir el tamaño de tu círculo */
   height: 120px;
@@ -458,7 +466,6 @@ input.cards-data-name{
   background-size: cover;
 }
 
-
 .profile-details-info {
   display: flex;
   flex-direction: column;
@@ -466,6 +473,38 @@ input.cards-data-name{
   justify-content: flex-start;
   padding-left: var(--font-size-large);
   width: calc(100% - 120PX);
+  align-self: center;
+}
+
+.profile-details-info-name {
+  font-size: var(--font-size-extra-large);
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.profile-details-location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.profile-details-location img {
+  width: 23px;
+  height: 20px;
+}
+
+.profile-details-location p {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.profile-details-rating p {
+  font-size: var(--font-size-medium);
+}
+
+.profile-details-rating p span{
+  font-weight: 700;
 }
 
 .profile-description {
@@ -477,17 +516,16 @@ input.cards-data-name{
   flex-direction: column;
 }
 
-.profile-actions a{
+.profile-actions a {
   display: block;
 }
 
-.profile-description textarea{
+.profile-description textarea {
   height: 150px;
   width: calc(100vw - 2rem);
-
 }
 
-.map-container{
+.map-container {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -502,21 +540,21 @@ input.cards-data-name{
   width: 100%;
 }
 
-.toggle-map{
+.toggle-map {
   margin-bottom: -125px;
 }
 
-.arrow-container{
+.arrow-container {
   position: relative;
   display: flex;
   justify-content: center;
   height: 30px;
   width: 100%;
-  background-color:var(--light-gray);
-  border-top: 1px solid var(--color-border);
+  background-color: #f2f2f2;
+  border-top: 1px solid #f3f3f3;
 }
 
-.arrow-slide-toogle{
+.arrow-slide-toogle {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -524,23 +562,23 @@ input.cards-data-name{
   cursor: pointer;
 }
 
-.map-text{
+.map-text {
   position: relative;
   z-index: 1;
   font-weight: 600;
   margin-top: 3px;
 }
 
-.arrow-bg{
+.arrow-bg {
   position: absolute;
   top: -24px;
-  background-color:var(--light-gray);
+  background-color: #f2f2f2;
   border-radius: 50%;
   width: 48px;
   height: 48px;
 }
 
-.arrow-img{
+.arrow-img {
   display: block;
   width: 22px;
   height: auto;
@@ -548,7 +586,6 @@ input.cards-data-name{
   transform: rotate(270deg);
 }
 
-.arrow-img--rotate{
+.arrow-img--rotate {
   transform: rotate(90deg);
 }
-
