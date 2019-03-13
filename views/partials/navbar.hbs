@@ -1,9 +1,9 @@
 <header class="top-bar">
   <nav>
     <div class="menuToggle">
-       <input class="checkbox" type="checkbox" />
+      <input class="checkbox" type="checkbox" />
       {{#if showBullet}}
-        <div class="bullet"></div>
+      <div class="bullet"></div>
       {{/if}}
       <!-- Some spans to act as a hamburger -->
       <span></span>
@@ -12,16 +12,21 @@
       <ul class="menu">
         <li><a href="/">Inicio</a></li>
         {{#if currentUser}}
-          {{#if showBullet}}
-            <li><a class="message-unread" href="/profile/message">Mensajes</a></li>
-          {{else}}
-            <li><a href="/profile/message">Mensajes</a></li>
-          {{/if}}
-          <li>
-            <form action="/auth/logout" method="post">
-              <button class="button-transparent" type="submit">Cerrar sesión</button>
-            </form>
-          </li>
+        {{#if showBullet}}
+        <li class="message-unread">
+          <a href="/profile/message">Mensajes</a>
+          <div class="bullet bullet--message"></div>
+        </li>
+        {{else}}
+        <li>
+          <a href="/profile/message">Mensajes</a>
+        </li>
+        {{/if}}
+        <li>
+          <form action="/auth/logout" method="post">
+            <button class="button-transparent" type="submit">Cerrar sesión</button>
+          </form>
+        </li>
         {{else}}
         <li><a href="/auth/signup">Registro</a></li>
         <li><a href="/auth/login">Iniciar sesión</a></li>
@@ -34,7 +39,9 @@
   </div>
   <div class="avatar">
     {{#if currentUser}}
-    <a href="/profile/{{currentUser._id}}"><div class="avatar-img" style="background-image:url({{currentUser.imageUrl}})"></div></a>
+    <a href="/profile/{{currentUser._id}}">
+      <div class="avatar-img" style="background-image:url({{currentUser.imageUrl}})"></div>
+    </a>
     {{/if}}
   </div>
 </header>

@@ -188,6 +188,10 @@ section {
   min-width: 80px;
 }
 
+.button-contract{
+  text-align: center;
+}
+
 .extra--vertical--margin {
   margin: 5px 0;
 }
@@ -203,7 +207,13 @@ section {
   z-index: 2;
 }
 
+.bullet--message{
+  top: 14px;
+  left: -24px;
+}
+
 .message-unread {
+  position: relative;
   font-weight: 700;
 }
 

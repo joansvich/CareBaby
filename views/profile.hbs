@@ -20,18 +20,20 @@
       <div class="profile-description">
         <p>{{userSelected.description}}</p>
       </div>
+      {{#if isMyUser}}
       <div>
-        {{#if isMyUser}}
         <form class="profile-actions" action="/profile/{{userSelected._id}}/delete" method="post">
           <a class="button" href="/profile/{{userSelected._id}}/edit">Editar</a>
           <button class="button button--delete" type="submit">Borrar cuenta</button>
         </form>
-        {{/if}}
-        {{#if isBabySitter}}
-        <a class="button" href="/profile/{{userSelected._id}}/hire">Contratar</a>
-        </form>
-        {{/if}}
       </div>
+      {{/if}}
+      {{#if isBabySitter}}
+      <div class="button-contract">
+        <a class="button" href="/profile/{{userSelected._id}}/hire">Contratar</a>
+      </div>
+      </form>
+      {{/if}}
     </article>
   </section>
 </main>
