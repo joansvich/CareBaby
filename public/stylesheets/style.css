@@ -77,6 +77,10 @@ textarea, input {
   margin: 0 20px;
 }
 
+main {
+  padding-top: 70px;
+}
+
 section {
   padding: 1rem;
 }
@@ -117,6 +121,7 @@ section {
 
 .logo {
   padding-left: 10px;
+  display: flex;
 }
 
 .logo img {
@@ -180,6 +185,7 @@ section {
   margin: 0;
   font-size: var(--font-size-xs);
   line-height: 1.5rem;
+  min-width: 80px;
 }
 
 .extra--vertical--margin {
@@ -429,6 +435,7 @@ section {
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-left: 1rem;
+  width: calc(100% - 80px);
 }
 
 .cards-data-name {
@@ -455,6 +462,16 @@ input.cards-data-name {
 .cards-data-location img {
   width: 15px;
   height: 16px;
+}
+
+.cards-buttons-feedback {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cards-buttons-feedback button {
+  margin-right: 4px;
 }
 
 /* Profile view */

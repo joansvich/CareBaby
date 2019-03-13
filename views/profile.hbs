@@ -1,35 +1,37 @@
 {{> navbar}}
-
-<section>
-  <article class="profile">
-    <div class="profile-details">
-      <div class="profile-details-avatar" style="background-image:url({{userSelected.imageUrl}})">
-      </div>
-      <div class="profile-details-info">
-        <p class="profile-details-info-name"><a href="/babysitter/{{userSelected._id}}">{{userSelected.username}}</a></p>
-        <div class="profile-details-location">
-          <img src="/images/pointer.svg" alt="">
-          <p>{{userSelected.city}}</p>
+<main>
+  <section>
+    <article class="profile">
+      <div class="profile-details">
+        <div class="profile-details-avatar" style="background-image:url({{userSelected.imageUrl}})">
         </div>
-        <div class="profile-details-rating">
-          <p>Valoración: <span>{{userSelected.rating}}/10</span></p>
+        <div class="profile-details-info">
+          <p class="profile-details-info-name"><a href="/babysitter/{{userSelected._id}}">{{userSelected.username}}</a>
+          </p>
+          <div class="profile-details-location">
+            <img src="/images/pointer.svg" alt="">
+            <p>{{userSelected.city}}</p>
+          </div>
+          <div class="profile-details-rating">
+            <p>Valoración: <span>{{userSelected.rating}}/10</span></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="profile-description">
-      <p>{{userSelected.description}}</p>
-    </div>
-    <div>
-      {{#if isMyUser}}
-      <form class="profile-actions"action="/profile/{{userSelected._id}}/delete" method="post">
-        <a class="button" href="/profile/{{userSelected._id}}/edit">Editar</a>
-        <button class="button button--delete" type="submit">Borrar cuenta</button>
-      </form>
-      {{/if}}
-      {{#if isBabySitter}}
+      <div class="profile-description">
+        <p>{{userSelected.description}}</p>
+      </div>
+      <div>
+        {{#if isMyUser}}
+        <form class="profile-actions" action="/profile/{{userSelected._id}}/delete" method="post">
+          <a class="button" href="/profile/{{userSelected._id}}/edit">Editar</a>
+          <button class="button button--delete" type="submit">Borrar cuenta</button>
+        </form>
+        {{/if}}
+        {{#if isBabySitter}}
         <a class="button" href="/profile/{{userSelected._id}}/hire">Contratar</a>
-      </form>
-      {{/if}}
-    </div>
-  </article>
-</section>
+        </form>
+        {{/if}}
+      </div>
+    </article>
+  </section>
+</main>

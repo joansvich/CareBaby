@@ -40,6 +40,7 @@ router.get('/profile', userIsNotLogged, async (req, res, next) => {
 router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
+    let noMessages = false;
     if (currentUser) {
       // Todos los contratos que ha solicitado el padre o canguro actual a otros canguros.
       const contractParent = await Contract.find({ parent: currentUser._id }).populate('babysitter');
@@ -57,7 +58,10 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
       const filterStateParent = contractParent.filter((parent) => {
         return parent.state !== 'Pendiente' && parent.state !== 'Feedback';
       });
-      res.render('message', { filterStateParent, filterStateBabysitter, filterStateFeedback });
+      if (filterStateBabysitter.length === 0 && filterStateFeedback.length === 0 && filterStateParent.length === 0) {
+        noMessages = true;
+      }
+      res.render('message', { filterStateParent, filterStateBabysitter, filterStateFeedback, noMessages });
     }
   } catch (error) {
     next(error);

@@ -1,28 +1,30 @@
 {{> navbar}}
 <form action="/profile/{{currentUser._id}}/update" method="post" enctype="multipart/form-data">
-  <section>
-    <article class="profile">
-      <div class="profile-details">
-        <div class="profile-details-avatar" style="background-image:url({{currentUser.imageUrl}})">
-        </div>
-        <div class="profile-details-info">
-          <input class="cards-data-name" type="text" name="username" value="{{currentUser.username}}" />
-          <div class="cards-data-location">
-            <img src="/images/pointer.svg" alt="">
-            <p>{{currentUser.city}}</p>
+  <main>
+    <section>
+      <article class="profile">
+        <div class="profile-details">
+          <div class="profile-details-avatar" style="background-image:url({{currentUser.imageUrl}})">
+          </div>
+          <div class="profile-details-info">
+            <input class="cards-data-name" type="text" name="username" value="{{currentUser.username}}" />
+            <div class="cards-data-location">
+              <img src="/images/pointer.svg" alt="">
+              <p>{{currentUser.city}}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="profile-description">
-        <textarea rows="4" cols="55" name="description">{{currentUser.description}}</textarea>
-      </div>
-      <div>
-        <label>Upload a picture</label>
-        <input type="file" name="image">
-      </div>
-      <div class="profile-actions">
-        <button class="button" type="submit">Aceptar</button>
-      </div>
-    </article>
-  </section>
+        <div class="profile-description">
+          <textarea rows="4" cols="55" name="description">{{currentUser.description}}</textarea>
+        </div>
+        <div>
+          <label>Upload a picture</label>
+          <input type="file" name="image">
+        </div>
+        <div class="profile-actions">
+          <button class="button" type="submit">Aceptar</button>
+        </div>
+      </article>
+    </section>
+  </main>
 </form>

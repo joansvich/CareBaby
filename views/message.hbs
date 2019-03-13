@@ -1,56 +1,61 @@
 {{> navbar}}
-
-<section>
-  {{#each filterStateBabysitter}}
-  <li class="cards-item">
-    <div class="cards-img avatar--large" style="background-image: url({{this.parent.imageUrl}})">
-    </div>
-    <div class="cards-data">
-      <p class="cards-data-name extra--vertical--margin"><a
-          href="/profile/{{this.parent._id}}">{{this.parent.username}}</a></p>
-      <div class="cards-data-location extra--vertical--margin">
-        <p>Ha solicitado tus servicios</p>
+<main>
+  <section>
+    {{#if noMessages}}
+    <p class="cards-title">No hay mensajes</p>
+    {{/if}}
+    {{#each filterStateBabysitter}}
+    <li class="cards-item">
+      <div class="cards-img avatar--large" style="background-image: url({{this.parent.imageUrl}})">
       </div>
-      <div>
-        <a class="button button--small" href="/profile/message/{{this._id}}/accept">Aceptar</a>
-        <a class="button button--delete button--small" href="/profile/message/{{this._id}}/decline">Rechazar</a>
+      <div class="cards-data">
+        <p class="cards-data-name extra--vertical--margin"><a
+            href="/profile/{{this.parent._id}}">{{this.parent.username}}</a></p>
+        <div class="cards-data-location extra--vertical--margin">
+          <p>Ha solicitado tus servicios</p>
+        </div>
+        <div>
+          <a class="button button--small" href="/profile/message/{{this._id}}/accept">Aceptar</a>
+          <a class="button button--delete button--small" href="/profile/message/{{this._id}}/decline">Rechazar</a>
+        </div>
       </div>
-    </div>
-  </li>
-  {{/each}}
-  {{#each filterStateParent}}
-  <li class="cards-item">
-    <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
-    </div>
-    <div class="cards-data">
-      <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
-      <div class="cards-data-location extra--vertical--margin">
-        <p>Estado de tu solicitud: {{this.state}}</p>
+    </li>
+    {{/each}}
+    {{#each filterStateParent}}
+    <li class="cards-item">
+      <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
       </div>
-      <div>
-        <a class="button button--small" href="/profile/message/{{this._id}}/feedback">Valorar a {{this.babysitter.username}}</a>
+      <div class="cards-data">
+        <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
+        <div class="cards-data-location extra--vertical--margin">
+          <p>Estado de tu solicitud: {{this.state}}</p>
+        </div>
+        <div>
+          <a class="button button--small" href="/profile/message/{{this._id}}/feedback">Valorar a
+            {{this.babysitter.username}}</a>
+        </div>
       </div>
-    </div>
-  </li>
-  {{/each}}
-  {{#each filterStateFeedback}}
-  <li class="cards-item">
-    <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
-    </div>
-    <div class="cards-data">
-      <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
-      <div class="cards-data-location extra--vertical--margin">
-        <p>¿Te ha gustado el servicio?</p>
+    </li>
+    {{/each}}
+    {{#each filterStateFeedback}}
+    <li class="cards-item">
+      <div class="cards-img" style="background-image: url({{this.babysitter.imageUrl}})">
       </div>
-      <div>
-        <form method="POST" action="/profile/message/{{this._id}}/feedback/yes">
-          <button class="button button--small" type="submit">Sí</button>
-        </form>
-        <form method="POST" action="/profile/message/{{this._id}}/feedback/no">
-          <button class="button button--small" type="submit">No</button>
-        </form>
+      <div class="cards-data">
+        <p class="cards-data-name"><a href="/profile/{{this.babysitter._id}}">{{this.babysitter.username}}</a></p>
+        <div class="cards-data-location extra--vertical--margin">
+          <p>¿Te ha gustado el servicio?</p>
+        </div>
+        <div class="cards-buttons-feedback">
+          <form method="POST" action="/profile/message/{{this._id}}/feedback/yes">
+            <button class="button button--small" type="submit">Sí</button>
+          </form>
+          <form method="POST" action="/profile/message/{{this._id}}/feedback/no">
+            <button class="button button--small button--delete" type="submit">No</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </li>
-  {{/each}}
-</section>
+    </li>
+    {{/each}}
+  </section>
+</main>
