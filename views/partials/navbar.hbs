@@ -10,7 +10,7 @@
       <span></span>
       <span></span>
       <ul class="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/">Inicio</a></li>
         {{#if currentUser}}
           {{#if showBullet}}
             <li><span class="message-unread"><a href="/profile/message">Mensajes</a></span></li>
@@ -18,11 +18,11 @@
             <li><a href="/profile/message">Mensajes</a></li>
           {{/if}}
         <form action="/auth/logout" method="post">
-          <li><button type="submit">Log Out</button></li>
+          <li><button type="submit">Cerrar sesión</button></li>
         </form>
         {{else}}
-        <li><a href="/auth/signup">Sign up</a></li>
-        <li><a href="/auth/login">Log In</a></li>
+        <li><a href="/auth/signup">Registro</a></li>
+        <li><a href="/auth/login">Iniciar sesión</a></li>
         {{/if}}
       </ul>
     </div>
