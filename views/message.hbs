@@ -43,8 +43,12 @@
         <p>¿Te ha gustado el servicio?</p>
       </div>
       <div>
-        <a class="button button--small" href="/profile/message/{{this._id}}/feedback/yes">Sí</a>
-        <a class="button button--delete button--small" href="/profile/message/{{this._id}}/feedback/no">No</a>
+        <form method="POST" action="/profile/message/{{this._id}}/feedback/yes">
+          <button class="button button--small" type="submit">Sí</button>
+        </form>
+        <form method="POST" action="/profile/message/{{this._id}}/feedback/no">
+          <button class="button button--small" type="submit">No</button>
+        </form>
       </div>
     </div>
   </li>

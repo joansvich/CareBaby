@@ -81,7 +81,10 @@ section {
   padding: 1rem;
 }
 
-/* ---- components ---- */
+.link {
+  color: var(--color-primary);
+  font-weight: 600;
+}
 
 .overlay {
   display: none;
@@ -103,6 +106,9 @@ section {
   justify-content: space-between;
   flex-direction: row;
   background-color: var(--color-primary);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
 }
 
 .logo, .avatar {
@@ -132,7 +138,7 @@ section {
   background-size: cover;
 }
 
-.button-transparent{
+.button-transparent {
   margin: 0;
   padding: 0;
   border: 0;
@@ -508,7 +514,7 @@ input.cards-data-name {
   font-size: var(--font-size-medium);
 }
 
-.profile-details-rating p span{
+.profile-details-rating p span {
   font-weight: 700;
 }
 
@@ -597,7 +603,7 @@ input.cards-data-name {
 
 /*** Login & Sing up ***/
 
-.login-title, .signup-title{
+.login-title, .signup-title {
   text-align: center;
   font-size: 30px;
   color: var( --dark);
@@ -605,26 +611,27 @@ input.cards-data-name {
   margin-top: 12px;
 }
 
-.login-form, .signup-form{
+.login-form, .signup-form {
   display: flex;
   flex-direction: column;
 }
 
-.login-input, .signup-input{
+.login-input, .signup-input {
   margin: 0.5rem 0;
 }
 
-.signup-input-radio{
+.signup-input-radio {
   position: relative;
 }
 
-.input-radio{
+.input-radio {
   position: relative;
   display: flex;
   flex-wrap: wrap;
 }
 
 /* The container */
+
 .input-radio .container {
   display: block;
   position: relative;
@@ -639,6 +646,7 @@ input.cards-data-name {
 }
 
 /* Hide the browser's default radio button */
+
 .input-radio .container input {
   position: absolute;
   opacity: 0;
@@ -646,6 +654,7 @@ input.cards-data-name {
 }
 
 /* Create a custom radio button */
+
 .input-radio .checkmark {
   position: absolute;
   top: 0;
@@ -657,11 +666,13 @@ input.cards-data-name {
 }
 
 /* When the radio button is checked, add a blue background */
-.input-radio .container input:checked ~ .checkmark {
+
+.input-radio .container input:checked~.checkmark {
   background-color: var(--color-radio-input);
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
+
 .input-radio .checkmark:after {
   content: "";
   position: absolute;
@@ -669,17 +680,19 @@ input.cards-data-name {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.input-radio .container input:checked ~ .checkmark:after {
+
+.input-radio .container input:checked~.checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
+
 .input-radio .container .checkmark:after {
   top: 8px;
   left: 8px;
   width: 9px;
-  height: 9px;;
-	border-radius: 50%;
-	background: var(--white);
+  height: 9px;
+  ;
+  border-radius: 50%;
+  background: var(--white);
 }
-

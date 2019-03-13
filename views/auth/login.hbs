@@ -5,6 +5,7 @@
     <form class="login-form" action="/auth/login" method="post">
       <input class="login-input" type="text" name="username" placeholder="Usuario">
       <input class="login-input" type="password" name="password" placeholder="Contraseña">
+      <p>¿Aún no tienes cuenta? <a class="link" href="/auth/signup">¡Regístrate!</a></p>
       <button class="button" type="submit">Iniciar sesión</button>
     </form>
     {{> flash}}

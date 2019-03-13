@@ -2,6 +2,7 @@ var express = require('express');
 const Contract = require('../models/Contract');
 const User = require('../models/User');
 const { userIsNotLogged } = require('../middlewares/auth');
+const { deleteContractMiddleWare } = require('../middlewares/index');
 const parser = require('../helpers/file-upload');
 
 var router = express.Router();
@@ -87,7 +88,7 @@ router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, nex
   }
 });
 
-// Feedback
+// Mostrar la lista de mensajes con feedback pendiente
 router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -98,49 +99,29 @@ router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, ne
   }
 });
 
-// Positive feedback
-router.get('/profile/message/:id/feedback/yes', userIsNotLogged, async (req, res, next) => {
+// Asignamos la valoración correspondiente al usuario en función de lo que ha indicado en la vista
+router.post('/profile/message/:id/feedback/:answer', userIsNotLogged, async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id, answer } = req.params;
     const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
     const babysitter = await User.findById(contract.babysitter);
     let totalFeedback = babysitter.totalFeedback;
     let positiveFeedback = babysitter.positiveFeedback;
-    totalFeedback++;
-    positiveFeedback++;
+    if (answer === 'yes') {
+      totalFeedback++;
+      positiveFeedback++;
+    } else {
+      totalFeedback++;
+    }
+
     await User.findByIdAndUpdate(contract.babysitter, { totalFeedback, positiveFeedback });
-
-    res.redirect(`/profile/message/${id}/delete`);
+    next();
   } catch (error) {
     next(error);
   }
-});
+}, deleteContractMiddleWare);
 
-// Negative feedback
-router.get('/profile/message/:id/feedback/no', userIsNotLogged, async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
-    const babysitter = await User.findById(contract.babysitter);
-    let totalFeedback = babysitter.totalFeedback;
-    totalFeedback++;
-    await User.findByIdAndUpdate(contract.babysitter, { totalFeedback });
-    res.redirect(`/profile/message/${id}/delete`);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Eliminar mensaje después de marcar como recibida la respuesta del canguro.
-router.get('/profile/message/:id/delete', userIsNotLogged, async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await Contract.findByIdAndDelete(id);
-    res.redirect('/profile/message');
-  } catch (error) {
-    next(error);
-  }
-});
+// Positive & Negative feedback
 
 router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   const { id } = req.params;
