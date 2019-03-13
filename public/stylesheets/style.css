@@ -132,6 +132,15 @@ section {
   background-size: cover;
 }
 
+.button-transparent{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: 400 var(--font-size-normal);
+  color: var(--dark);
+}
+
 .button {
   display: inline-block;
   color: var(--white);
@@ -346,12 +355,6 @@ section {
   color: var(--dark);
 }
 
-.menu button {
-  padding: 10px 0;
-  font-size: 22px;
-  color: var(--dark);
-}
-
 /*
 * And let's slide it in from the left
 */
@@ -371,6 +374,7 @@ section {
   font-size: 30px;
   color: var( --dark);
   font-weight: 600;
+  line-height: 120%;
   margin-top: 12px;
   padding-bottom: 24px;
   text-align: center;

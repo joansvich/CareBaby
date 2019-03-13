@@ -17,9 +17,11 @@
           {{else}}
             <li><a href="/profile/message">Mensajes</a></li>
           {{/if}}
-        <form action="/auth/logout" method="post">
-          <li><button type="submit">Cerrar sesión</button></li>
-        </form>
+          <li>
+            <form action="/auth/logout" method="post">
+              <button class="button-transparent" type="submit">Cerrar sesión</button>
+            </form>
+          </li>
         {{else}}
         <li><a href="/auth/signup">Registro</a></li>
         <li><a href="/auth/login">Iniciar sesión</a></li>
