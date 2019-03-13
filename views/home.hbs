@@ -2,7 +2,11 @@
 <main>
   <section>
     <ul class="cards">
-      <p class="cards-title">Canguros disponibles</p>
+      {{#if babySitterArray}}
+        <p class="cards-title">Canguros disponibles</p>
+        {{else}}
+        <p class="cards-title">No hay canguros disponibles</p>
+      {{/if}}
       {{#each babySitterArray}}
       <li><a class="cards-item" href="/profile/{{this._id}}">
         <div class="cards-img" style="background-image: url({{this.imageUrl}})">
