@@ -1,7 +1,12 @@
-<h1>Inicio de sesión</h1>
-<form action="/auth/login" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <button class="button" type="submit">Iniciar sesión</button>
-</form>
-{{> flash}}
+{{> navbar}}
+<main>
+  <section class="login">
+    <h1 class="login-title">Inicio de sesión</h1>
+    <form class="login-form" action="/auth/login" method="post">
+      <input class="login-input" type="text" name="username" placeholder="Usuario">
+      <input class="login-input" type="password" name="password" placeholder="Contraseña">
+      <button class="button" type="submit">Iniciar sesión</button>
+    </form>
+    {{> flash}}
+  </section>
+</main>
