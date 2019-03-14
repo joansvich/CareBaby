@@ -9,7 +9,14 @@ var router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const babySitterArray = await User.find({ userType: 'babysitter' });
+    const currentUser = req.session.currentUser;
+    let babySitterArray = await User.find({ userType: 'babysitter' });
+    // Si estas login mostrar todos los canguros menos tu el tuyo.
+    if (currentUser) {
+      babySitterArray = babySitterArray.filter(babysitter => {
+        return babysitter._id.toString() !== currentUser._id;
+      });
+    }
     babySitterArray.forEach((babysitter) => {
       if (babysitter.totalFeedback === 0) {
         babysitter.rating = 0;
