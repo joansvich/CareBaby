@@ -37,11 +37,11 @@ const main = async () => {
     };
 
     const error = (error) => {
-      console.log(error);
+      console.error(error);
     };
 
     if (!navigator.geolocation) {
-      console.log('Geolocation is not supported by your browser');
+      console.error('Geolocation is not supported by your browser');
     } else {
       navigator.geolocation.getCurrentPosition(hasLocation, error);
     }
@@ -84,9 +84,7 @@ const searchBabysitters = async () => {
   try {
     const babysitterRequest = await fetch(`/api/user`);
     if (babysitterRequest.status === 404) {
-      console.log('No hay canguro');
-      // const errorElement = document.querySelector('.error');
-      // errorElement.style.visibility = 'visible';
+      console.error('No hay canguro');
     }
     const arrayBabysitters = await babysitterRequest.json();
     return arrayBabysitters;

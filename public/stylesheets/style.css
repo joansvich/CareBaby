@@ -474,6 +474,10 @@ input.cards-data-name {
   height: 16px;
 }
 
+.cards-rating span{
+  font-weight: 600;
+}
+
 .cards-buttons-feedback {
   display: flex;
   flex-direction: row;

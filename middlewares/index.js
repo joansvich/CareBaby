@@ -6,6 +6,7 @@ module.exports = {
       const { id } = req.params;
       await Contract.findByIdAndDelete(id);
       res.redirect('/profile/message');
+      return;
     } catch (error) {
       next(error);
     }

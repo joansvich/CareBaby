@@ -20,10 +20,10 @@ const main = () => {
   };
 
   const error = (error) => {
-    console.log(error);
+    console.error(error);
   };
   if (!navigator.geolocation) {
-    console.log('Geolocation is not supported by your browser');
+    console.error('Geolocation is not supported by your browser');
   } else {
     navigator.geolocation.getCurrentPosition(hasLocation, error);
   }

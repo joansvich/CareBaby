@@ -56,7 +56,7 @@ router.post('/signup', userIsLogged, async (req, res, next) => {
     // redirect home
     res.redirect('/');
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
 
@@ -90,7 +90,6 @@ router.post('/login', userIsLogged, async (req, res, next) => {
     }
     if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user;
-      console.log('Login!');
       res.redirect('/');
       return;
     } else {
@@ -99,13 +98,12 @@ router.post('/login', userIsLogged, async (req, res, next) => {
       return;
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
 
 router.post('/logout', userIsNotLogged, (req, res, next) => {
   delete req.session.currentUser;
-  console.log('logout');
   res.redirect('/');
 });
 

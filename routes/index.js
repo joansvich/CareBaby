@@ -17,13 +17,6 @@ router.get('/', async (req, res, next) => {
         return babysitter._id.toString() !== currentUser._id;
       });
     }
-    babySitterArray.forEach((babysitter) => {
-      if (babysitter.totalFeedback === 0) {
-        babysitter.rating = 0;
-      } else {
-        babysitter.rating = (babysitter.positiveFeedback / babysitter.totalFeedback * 10).toFixed();
-      }
-    });
     res.render('home', { babySitterArray });
   } catch (error) {
     next(error);
@@ -141,13 +134,7 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   let isBabySitter = false;
   try {
     const userSelected = await User.findById(id);
-    if (userSelected.totalFeedback === 0) {
-      userSelected.rating = 0;
-    } else {
-      userSelected.rating = ((userSelected.positiveFeedback / userSelected.totalFeedback) * 10).toFixed();
-    }
     if (id === currentUser._id) {
-      console.log(currentUser.userType);
       isMyUser = true;
     } else if (!isMyUser && userSelected.userType === 'babysitter') {
       isBabySitter = true;
