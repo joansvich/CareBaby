@@ -58,6 +58,15 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
       const filterStateParent = contractParent.filter((parent) => {
         return parent.state !== 'Pendiente' && parent.state !== 'Feedback';
       });
+
+      filterStateParent.forEach(parent => {
+        if (parent.state === 'Denegado') {
+          parent.denegado = true;
+        } else {
+          parent.denegado = false;
+        }
+      });
+
       if (filterStateBabysitter.length === 0 && filterStateFeedback.length === 0 && filterStateParent.length === 0) {
         noMessages = true;
       }
@@ -90,6 +99,9 @@ router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, nex
   } catch (error) {
     next(error);
   }
+});
+
+router.post('/profile/message/:id/delete', userIsNotLogged, deleteContractMiddleWare, (req, res, next) => {
 });
 
 // Mostrar la lista de mensajes con feedback pendiente

@@ -30,10 +30,18 @@
         <div class="cards-data-location extra--vertical--margin">
           <p>Estado de tu solicitud: {{this.state}}</p>
         </div>
+        {{#if this.denegado}}
+        <div>
+          <form action="/profile/message/{{this._id}}/delete" method="post">
+            <button class="button button--small" type="submit">Cerrar</button>
+          </form>
+        </div>
+        {{else}}
         <div>
           <a class="button button--small" href="/profile/message/{{this._id}}/feedback">Valorar a
             {{this.babysitter.username}}</a>
         </div>
+        {{/if}}
       </div>
     </li>
     {{/each}}
