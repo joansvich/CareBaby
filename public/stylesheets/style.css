@@ -36,12 +36,6 @@ body {
   padding: 0;
 }
 
-h1 {}
-
-h2 {}
-
-h3 {}
-
 p {
   margin: 0;
 }
@@ -83,6 +77,11 @@ main {
 
 section {
   padding: 1rem;
+}
+
+.img-responsive{
+  width: 100%;
+  height: auto;
 }
 
 .link {
