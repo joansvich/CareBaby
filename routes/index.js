@@ -2,7 +2,7 @@ var express = require('express');
 const Contract = require('../models/Contract');
 const User = require('../models/User');
 const { userIsNotLogged } = require('../middlewares/auth');
-const { deleteContractMiddleWare } = require('../middlewares/index');
+const { deleteContractMiddleWare, isIdValid } = require('../middlewares/index');
 const parser = require('../helpers/file-upload');
 
 var router = express.Router();
@@ -78,11 +78,14 @@ router.get('/profile/message', userIsNotLogged, async (req, res, next) => {
 });
 
 // El canguro actualiza el estado de la solicitud a 'Aceptado'
-router.get('/profile/message/:id/accept', userIsNotLogged, async (req, res, next) => {
+router.get('/profile/message/:id/accept', userIsNotLogged, isIdValid, async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Contract.findByIdAndUpdate(id, { state: 'Aceptado' });
-
+    const contract = await Contract.findByIdAndUpdate(id, { state: 'Aceptado' });
+    if (!contract) {
+      next();
+      return;
+    }
     res.redirect('/profile/message');
   } catch (error) {
     next(error);
@@ -90,25 +93,33 @@ router.get('/profile/message/:id/accept', userIsNotLogged, async (req, res, next
 });
 
 // El canguro actualiza el estado de la solicitud a 'Denegado'
-router.get('/profile/message/:id/decline', userIsNotLogged, async (req, res, next) => {
+router.get('/profile/message/:id/decline', userIsNotLogged, isIdValid, async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Contract.findByIdAndUpdate(id, { state: 'Denegado' });
-
+    const contract = await Contract.findByIdAndUpdate(id, { state: 'Denegado' });
+    if (!contract) {
+      next();
+      return;
+    }
     res.redirect('/profile/message');
   } catch (error) {
     next(error);
   }
 });
 
-router.post('/profile/message/:id/delete', userIsNotLogged, deleteContractMiddleWare, (req, res, next) => {
-});
+router.post('/profile/message/:id/delete', userIsNotLogged, isIdValid, (req, res, next) => {
+  next();
+}, deleteContractMiddleWare);
 
 // Mostrar la lista de mensajes con feedback pendiente
 router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    if (!contract) {
+      next();
+      return;
+    }
     res.redirect('/profile/message');
   } catch (error) {
     next(error);
@@ -116,10 +127,14 @@ router.get('/profile/message/:id/feedback', userIsNotLogged, async (req, res, ne
 });
 
 // Asignamos la valoración correspondiente al usuario en función de lo que ha indicado en la vista
-router.post('/profile/message/:id/feedback/:answer', userIsNotLogged, async (req, res, next) => {
+router.post('/profile/message/:id/feedback/:answer', userIsNotLogged, isIdValid, async (req, res, next) => {
   try {
     const { id, answer } = req.params;
     const contract = await Contract.findByIdAndUpdate(id, { state: 'Feedback' });
+    if (!contract) {
+      next();
+      return;
+    }
     const babysitter = await User.findById(contract.babysitter);
     let totalFeedback = babysitter.totalFeedback;
     let positiveFeedback = babysitter.positiveFeedback;
@@ -137,15 +152,27 @@ router.post('/profile/message/:id/feedback/:answer', userIsNotLogged, async (req
   }
 }, deleteContractMiddleWare);
 
+router.get('/profile/edit', userIsNotLogged, async (req, res, next) => {
+  try {
+    res.render('edit-profile');
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Positive & Negative feedback
 
-router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
+router.get('/profile/:id', userIsNotLogged, isIdValid, async (req, res, next) => {
   const { id } = req.params;
   const currentUser = req.session.currentUser;
   let isMyUser = false;
   let isBabySitter = false;
   try {
     const userSelected = await User.findById(id);
+    if (!userSelected) {
+      next();
+      return;
+    }
     if (id === currentUser._id) {
       isMyUser = true;
     } else if (!isMyUser && userSelected.userType === 'babysitter') {
@@ -158,18 +185,15 @@ router.get('/profile/:id', userIsNotLogged, async (req, res, next) => {
   }
 });
 
-router.get('/profile/:id/edit', userIsNotLogged, async (req, res, next) => {
-  try {
-    res.render('edit-profile');
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Crear contrato
-router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
+router.get('/profile/:id/hire', userIsNotLogged, isIdValid, async (req, res, next) => {
   try {
     const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+      next();
+      return;
+    }
     const contract = {};
     // Solicitud por parte del usuario logeado
     contract.parent = req.session.currentUser._id;
@@ -183,7 +207,7 @@ router.get('/profile/:id/hire', userIsNotLogged, async (req, res, next) => {
   }
 });
 
-router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), async (req, res, next) => {
+router.post('/profile/:id/update', userIsNotLogged, isIdValid, parser.single('image'), async (req, res, next) => {
   const { username, description } = req.body;
   const { id } = req.params;
   try {
@@ -202,6 +226,10 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
     }
 
     const updatedUser = await User.findByIdAndUpdate(id, editUser, { new: true });
+    if (!updatedUser) {
+      next();
+      return;
+    }
     req.session.currentUser = updatedUser;
     res.redirect(`/profile/${id}`);
   } catch (error) {
@@ -209,10 +237,14 @@ router.post('/profile/:id/update', userIsNotLogged, parser.single('image'), asyn
   }
 });
 
-router.post('/profile/:id/delete', userIsNotLogged, async (req, res, next) => {
+router.post('/profile/:id/delete', userIsNotLogged, isIdValid, async (req, res, next) => {
   try {
     const { id } = req.params;
     await User.findByIdAndDelete(id);
+    if (!User) {
+      next();
+      return;
+    }
     delete req.session.currentUser;
     res.redirect('/');
   } catch (error) {
