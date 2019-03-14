@@ -602,6 +602,7 @@ input.cards-data-name {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: var(--dark);
 }
 
 .map-text {
