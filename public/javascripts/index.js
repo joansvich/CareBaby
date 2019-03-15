@@ -15,6 +15,7 @@ const index = () => {
   const arrowContainer = document.querySelector('.arrow-container');
   const arrowBg = document.querySelector('.arrow-bg');
   const buttonDarkMode = document.querySelector('.js-button-dark-mode');
+  const input = document.querySelector('.js-button-dark-mode input');
   // Menu
   const handleClick = (event) => {
     (event.target.checked) ? overlay.style.display = 'block' : overlay.style.display = 'none';
@@ -26,34 +27,33 @@ const index = () => {
 
     if (darkmode === 'yes') {
       body.setAttribute('class', 'darkmode');
+      input.checked = true;
     } else {
       body.removeAttribute('class');
+      input.checked = false;
     }
 
     // funció per anar canviant valor darkmode
     // s'executarà en cada click
 
     const toogleDarkMode = (event) => {
-      const input = document.querySelector('.js-button-dark-mode input');
       switch (darkmode) {
-      case 'yes':
-        localStorage.removeItem(darkmode);
-        localStorage.setItem('darkmode', 'no');
-        input.checked = false;
-        window.location.href = '/';
+      case 'yes': setDarkMode('no');
         break;
-      case 'no':
-        localStorage.removeItem(darkmode);
-        localStorage.setItem('darkmode', 'yes');
-        input.checked = true;
-        window.location.href = '/';
+      case 'no': setDarkMode('yes');
         break;
-      default:
-        console.log('no entro');
       }
     };
     buttonDarkMode.addEventListener('click', toogleDarkMode);
   }
+
+  const setDarkMode = (newSetting) => {
+    localStorage.setItem('darkmode', newSetting);
+    input.checked = !input.checked;
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 300);
+  };
 
   // Dark mode
   let i = 0;
@@ -80,7 +80,6 @@ const index = () => {
       arrowBg.style.transition = 'all 1s ease';
     }
     i++;
-    console.log(i);
   };
   logo.addEventListener('click', darkMode);
 };

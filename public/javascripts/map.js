@@ -71,8 +71,12 @@ const main = async () => {
           `))
         .addTo(map);
     });
+
     // Poner el mapa en dark mode
-    // map.setStyle('mapbox://styles/mapbox/dark-v9');
+    if (window.localStorage.getItem('darkmode') === 'yes') {
+      map.setStyle('mapbox://styles/mapbox/dark-v9');
+    }
+
     map.addControl(new MapboxGeocoder({
       accessToken: mapboxgl.accessToken
     }));

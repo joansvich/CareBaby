@@ -14,7 +14,6 @@
 }
 
 .darkmode {
-
   background-color: var(--dark-mode-background);
   color: var(--dark-mode-color);
 }
@@ -26,55 +25,53 @@
 .darkmode .menu li a {
   color: var(--dark-mode-color);
 }
+
 .darkmode .menu li button {
   color: var(--dark-mode-color);
 }
 
-.darkmode a{
-  color:var(--dark-mode-color);
+.darkmode a {
+  color: var(--dark-mode-color);
 }
 
 .darkmode .button--small {
-  color:var(--dark-mode-color-light);
+  color: var(--dark-mode-color-light);
 }
 
 .darkmode .button {
-  color:var(--dark-mode-color-light);
+  color: var(--dark-mode-color-light);
   background-color: var(--top-bar-background);
 }
+
 .darkmode .button--delete {
   background-color: var(--dark-mode-red);
 }
 
 .darkmode .cards-title {
-  color:var(--dark-mode-color);
+  color: var(--dark-mode-color);
 }
 
 .darkmode .top-bar {
-
   background-color: var(--top-bar-background);
 }
 
 .darkmode .cards-item {
-
   background-color: var(--cards-item-background);
 }
 
-.darkmode .arrow-container{
- 
+.darkmode .arrow-container {
   background-color: var(--arrow-container-color);
   border: 1px solid var(--arrow-container-color);
 }
 
 .darkmode .arrow-bg {
-
   background-color: var(--arrow-container-color)
 }
 
 .darkmode .map-text {
-
   color: var(--dark-mode-color);
 }
+
 /** Switch  button **/
 
 .switch input {
@@ -88,20 +85,22 @@
   height: 1em;
   width: 2em;
   margin-top: 0.5rem;
-  background: var(--top-bar-background);
+  background: #b5b7b7;
   border-radius: 1em;
 }
+
 
 .switch div {
   height: 1em;
   width: 1em;
   border-radius: 1em;
   background: #FFF;
-  box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+  box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.3);
   transition: all 300ms;
 }
 
-.switch input:checked + div {
+.switch input:checked+div {
+  background: var(--top-bar-background);
   -webkit-transform: translate3d(100%, 0, 0);
   -moz-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
