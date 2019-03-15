@@ -15,6 +15,7 @@ const index = () => {
   const arrowContainer = document.querySelector('.arrow-container');
   const arrowBg = document.querySelector('.arrow-bg');
   const buttonDarkMode = document.querySelector('.js-button-dark-mode');
+  const switchDisplay = document.querySelector('.js-display-switch');
   const input = document.querySelector('.js-button-dark-mode input');
   // Menu
   const handleClick = (event) => {
@@ -23,7 +24,7 @@ const index = () => {
   checkbox.addEventListener('click', handleClick);
 
   if (unlockDarkMode === 'yes') {
-    buttonDarkMode.style.display = 'block';
+    switchDisplay.style.display = 'block';
 
     if (darkmode === 'yes') {
       body.setAttribute('class', 'darkmode');
@@ -35,7 +36,6 @@ const index = () => {
 
     // funció per anar canviant valor darkmode
     // s'executarà en cada click
-
     const toogleDarkMode = (event) => {
       switch (darkmode) {
       case 'yes': setDarkMode('no');
@@ -62,8 +62,8 @@ const index = () => {
       body.setAttribute('class', 'darkmode');
       localStorage.setItem('unlockDarkMode', 'yes');
       localStorage.setItem('darkmode', 'yes');
-      buttonDarkMode.style.display = 'block';
-
+      switchDisplay.style.display = 'block';
+      input.checked = true;
       // DOM para transition
 
       // // Modificamos las propiedades
