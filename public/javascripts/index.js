@@ -34,15 +34,19 @@ const index = () => {
     // s'executarà en cada click
 
     const toogleDarkMode = (event) => {
-      console.log(darkmode);
+      const input = document.querySelector('.js-button-dark-mode input');
       switch (darkmode) {
       case 'yes':
         localStorage.removeItem(darkmode);
         localStorage.setItem('darkmode', 'no');
+        input.checked = false;
+        window.location.href = '/';
         break;
       case 'no':
         localStorage.removeItem(darkmode);
         localStorage.setItem('darkmode', 'yes');
+        input.checked = true;
+        window.location.href = '/';
         break;
       default:
         console.log('no entro');
