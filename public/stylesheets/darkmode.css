@@ -1,7 +1,12 @@
 :root {
   --dark-mode-background: rgb(50, 54, 56);
+  --dark-mode-color: #9e9e9e;
+  --dark-mode-color-light: #ffffff;
   --top-bar-background: #3684a7;
   --cards-item-background: rgb(69, 75, 78);
+  --arrow-container-color: rgb(84, 84, 84);
+  --menu-color: #616161;
+  --dark-mode-red: #720000;
 }
 
 .js-button-dark-mode {
@@ -9,13 +14,64 @@
 }
 
 .darkmode {
+
   background-color: var(--dark-mode-background);
+  color: var(--dark-mode-color);
+}
+
+.darkmode .menu {
+  background-color: var(--menu-color);
+}
+
+.darkmode .menu li a {
+  color: var(--dark-mode-color);
+}
+.darkmode .menu li button {
+  color: var(--dark-mode-color);
+}
+
+.darkmode a{
+  color:var(--dark-mode-color);
+}
+
+.darkmode .button--small {
+  color:var(--dark-mode-color-light);
+}
+
+.darkmode .button {
+  color:var(--dark-mode-color-light);
+  background-color: var(--top-bar-background);
+}
+.darkmode .button--delete {
+  background-color: var(--dark-mode-red);
+}
+
+.darkmode .cards-title {
+  color:var(--dark-mode-color);
 }
 
 .darkmode .top-bar {
+
   background-color: var(--top-bar-background);
 }
 
 .darkmode .cards-item {
+
   background-color: var(--cards-item-background);
+}
+
+.darkmode .arrow-container{
+ 
+  background-color: var(--arrow-container-color);
+  border: 1px solid var(--arrow-container-color);
+}
+
+.darkmode .arrow-bg {
+
+  background-color: var(--arrow-container-color)
+}
+
+.darkmode .map-text {
+
+  color: var(--dark-mode-color);
 }

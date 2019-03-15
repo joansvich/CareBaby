@@ -59,22 +59,21 @@ const index = () => {
       localStorage.setItem('unlockDarkMode', 'yes');
       localStorage.setItem('darkmode', 'yes');
       buttonDarkMode.style.display = 'block';
+
+      // DOM para transition
+
       // // Modificamos las propiedades
 
-      // html.style.transition = 'all 1s ease';
-      // html.style.background = 'rgb(50, 54, 56)';
-      // body.style.transition = 'all 1s ease';
-      // body.style.setProperty('--dark', '#999');
-      // body.style.setProperty('--color-primary', '#3684a7');
-      // cardsItem.forEach(card => {
-      //   card.style.transition = 'all 1s ease';
-      //   card.style.background = 'rgb(69, 75, 78)';
-      // });
-      // arrowContainer.style.transition = 'all 1s ease';
-      // arrowContainer.style.background = 'rgb(84, 84, 84)';
-      // arrowContainer.style.border = '1px solid rgb(84, 84, 84)';
-      // arrowBg.style.transition = 'all 1s ease';
-      // arrowBg.style.background = 'rgb(84, 84, 84)';
+      html.style.transition = 'all 1s ease';
+
+      body.style.transition = 'all 1s ease';
+
+      cardsItem.forEach(card => {
+        card.style.transition = 'all 1s ease';
+      });
+      arrowContainer.style.transition = 'all 1s ease';
+
+      arrowBg.style.transition = 'all 1s ease';
     }
     i++;
     console.log(i);

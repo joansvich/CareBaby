@@ -447,7 +447,6 @@ section {
 
 .cards-data-name {
   font-size: var(--font-size-large);
-  color: var(--dark);
   font-weight: 600;
 }
 
@@ -724,13 +723,4 @@ input.cards-data-name {
   ;
   border-radius: 50%;
   background: var(--white);
-}
-
-/* dark mode */
-
-.darkmode {
-  --white:rgb(50, 54, 56);
-  --color-primary: #3684a7;
-  --white-cards-item: rgb(69, 75, 78);
-
 }
