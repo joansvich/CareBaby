@@ -65,7 +65,7 @@ const main = async () => {
             <div class="popup-details">
               <p class="popup-details-name"><a href="/profile/${babysitter._id}">${babysitter.username}</a></p>
               <p>${babysitter.city}</p>
-              <p>XXXXX</p>
+              <p>${babysitter.positiveFeedback} de ${babysitter.totalFeedback}</p>
             </div>
           </div>
           `))
