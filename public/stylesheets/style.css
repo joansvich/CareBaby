@@ -65,6 +65,15 @@ textarea, input {
   width: 100%;
 }
 
+.phone {
+  font-size: var(--font-size-medium);
+  margin-bottom: 8px;
+}
+
+.phone span {
+  font-weight: 700;
+}
+
 .container {
   margin: 0 20px;
 }
