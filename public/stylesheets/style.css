@@ -721,16 +721,6 @@ input.cards-data-name {
   left: 8px;
   width: 9px;
   height: 9px;
-  ;
   border-radius: 50%;
   background: var(--white);
-}
-
-/* dark mode */
-
-.darkmode {
-  --white:rgb(50, 54, 56);
-  --color-primary: #3684a7;
-  --white-cards-item: rgb(69, 75, 78);
-
 }
