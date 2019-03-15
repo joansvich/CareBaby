@@ -21,6 +21,7 @@
 
 html {
   box-sizing: border-box;
+
 }
 
 *, *:before, *:after {
@@ -34,6 +35,8 @@ body {
   line-height: 147%;
   margin: 0;
   padding: 0;
+  background-color: var(--white);
+  
 }
 
 p {
@@ -51,12 +54,7 @@ li {
 
 a {
   text-decoration: none;
-  transition: color 0.3s ease;
   color: var(--dark);
-}
-
-a:hover {
-  color: var(--color-primary-hover);
 }
 
 textarea, input {
@@ -411,7 +409,7 @@ section {
   /* border: 0.5px solid var(--color-primary); */
   margin: 10px 0;
   border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28)
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
 
 .cards-item-arrow {
@@ -726,4 +724,13 @@ input.cards-data-name {
   ;
   border-radius: 50%;
   background: var(--white);
+}
+
+/* dark mode */
+
+.darkmode {
+  --white:rgb(50, 54, 56);
+  --color-primary: #3684a7;
+  --white-cards-item: rgb(69, 75, 78);
+
 }

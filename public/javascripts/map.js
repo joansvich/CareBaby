@@ -71,7 +71,8 @@ const main = async () => {
           `))
         .addTo(map);
     });
-
+    // Poner el mapa en dark mode
+    // map.setStyle('mapbox://styles/mapbox/dark-v9');
     map.addControl(new MapboxGeocoder({
       accessToken: mapboxgl.accessToken
     }));
@@ -94,3 +95,22 @@ const searchBabysitters = async () => {
 };
 
 window.addEventListener('load', main);
+
+// Toggle map
+const arrow = document.querySelector('.arrow-slide-toogle');
+const map = document.querySelector('.map-container');
+const mapArrowImage = document.querySelector('.arrow-img');
+const mapText = document.querySelector('.map-text');
+const handleClickToggleMap = (event) => {
+  if (event.target) {
+    map.classList.toggle('toggle-map');
+    mapArrowImage.classList.toggle('arrow-img--rotate');
+    // Toggle text
+    if (mapText.innerHTML === 'Ver mapa') {
+      mapText.innerHTML = 'Ocultar mapa';
+    } else if (mapText.innerHTML === 'Ocultar mapa') {
+      mapText.innerHTML = 'Ver mapa';
+    }
+  }
+};
+arrow.addEventListener('click', handleClickToggleMap);

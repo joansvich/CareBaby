@@ -1,0 +1,21 @@
+:root {
+  --dark-mode-background: rgb(50, 54, 56);
+  --top-bar-background: #3684a7;
+  --cards-item-background: rgb(69, 75, 78);
+}
+
+.js-button-dark-mode {
+  display: none;
+}
+
+.darkmode {
+  background-color: var(--dark-mode-background);
+}
+
+.darkmode .top-bar {
+  background-color: var(--top-bar-background);
+}
+
+.darkmode .cards-item {
+  background-color: var(--cards-item-background);
+}
