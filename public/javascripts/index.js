@@ -1,5 +1,3 @@
-window.localStorage.setItem('unlockDarkMode', 'no');
-window.localStorage.setItem('darkmode', 'no');
 const index = () => {
   const checkbox = document.querySelector('.checkbox');
   const overlay = document.querySelector('.overlay');
