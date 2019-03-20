@@ -105,7 +105,7 @@ The url to your repository and to your deployed project
 
 [Repository Link](https://github.com/joansvich/CareBaby)
 
-[Deploy Link](http://heroku.com)
+[Deploy Link](http://carebaby.herokuappcom)
 
 ### Slides
 
